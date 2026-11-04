@@ -1,0 +1,1665 @@
+{
+    "code": 0,
+    "msg": "",
+    "data": {
+        "ugc_voice_list": [
+            {
+                "id": "104",
+                "model_name": "",
+                "name": "温柔桃子（升级版）",
+                "language": "中文",
+                "style_id": "zh_female_wenroutaozi_uranus_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "812ddac59a43e2ce535203563f0c8af7",
+                    "preview_text": "你好呀！有什么有趣的事情想和我分享吗？我最近学会了四川话、东北话和陕西话，快来试试吧！",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1765853242941191145.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=75Txlq%2FVxZ4sfRNasRT6qLftEss%3D",
+                    "md5": "812ddac59a43e2ce535203563f0c8af7",
+                    "preview_audio_uri": "op_voice/1765853242941191145.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1702282436,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/1166209_1705411537442891198.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/1166209_1705411537442891198.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=d557fXT2VYnWrf1xC%2BjVnaBdPhc%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_female_wenroutaozi_v2_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "92865679864322",
+                "model_name": "",
+                "name": "磁性俊宇（升级版）",
+                "language": "中文",
+                "style_id": "zh_male_cixingjunyu_uranus_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "8b8672ae4d0e5248890a55b856345239",
+                    "preview_text": "现在有一杯咖啡和两小时的闲暇时间，你最想做什么呢？",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1721221989980706116.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=PSlgcY57MXwJ7LdHUTBqMbD1Gkc%3D",
+                    "md5": "8b8672ae4d0e5248890a55b856345239",
+                    "preview_audio_uri": "op_voice/1721221989980706116.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1721195233,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/7128072_1721222049957338808.png",
+                    "url": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/7128072_1721222049957338808.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=UhSZ24P4L08anl%2Fmn9kcotRYxM0%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 222,
+                        "tag_type": 11,
+                        "tag_value": "帅气"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_nuanxinshizhe_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "5238154621186",
+                "model_name": "",
+                "name": "阳光甜妹（升级版）",
+                "language": "中文",
+                "style_id": "zh_female_yangguangtianmei_uranus_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "7bdd8762d71cd4619686e0f3476da655",
+                    "preview_text": "哈喽~你好呀！今天过得怎么样？",
+                    "preview_audio": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1750733138591287846.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=hu%2F6k2Qx678%2FgLq1JNItPwQyrEo%3D",
+                    "md5": "7bdd8762d71cd4619686e0f3476da655",
+                    "preview_audio_uri": "op_voice/1750733138591287846.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1706607839,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716780512224291231.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716780512224291231.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=fCdb0%2B8MMTjIKt1wtOPUgxZlk%2FQ%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 2,
+                        "tag_type": 3,
+                        "tag_value": "台湾口音"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_female_xiaohe_conversation_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "29798555618523394",
+                "model_name": "",
+                "name": "温柔桃子（经典版）",
+                "language": "中文",
+                "style_id": "zh_female_wenroutaozi_v2_mars_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "723cb92aa21e7d0b6edece64d5d9479c",
+                    "preview_text": "你好呀！有什么有趣的事情想和我分享吗？我最近学会了四川话、东北话和陕西话，快来试试吧！",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1765853289808544150.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=4c%2Bqi3oPYDVrjSd33Y1cqueCucE%3D",
+                    "md5": "723cb92aa21e7d0b6edece64d5d9479c",
+                    "preview_audio_uri": "op_voice/1765853289808544150.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1763519369,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6365612_1763519239309252298.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6365612_1763519239309252298.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=%2BztynEs97dOxZoPaohC3jdjBecE%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_female_wenroutaozi_v2_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "2",
+                "model_name": "",
+                "name": "邻家女孩",
+                "language": "中文",
+                "style_id": "zh_female_f261_conversation_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "dcfd7c4685cd293b755f131b117ed361",
+                    "preview_text": "你好啊，我能帮你做些什么呢？",
+                    "preview_audio": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1706609992628078146.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=De8u10op5cZOQzbHSJc79SKCCsQ%3D",
+                    "md5": "dcfd7c4685cd293b755f131b117ed361",
+                    "preview_audio_uri": "op_voice/1706609992628078146.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1702282436,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716780451746691131.png",
+                    "url": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716780451746691131.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=a8zFFC4vLDPffTiMQ06wMtnL9K0%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 144,
+                        "tag_type": 11,
+                        "tag_value": "耐心"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_female_f261_conversation_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "28",
+                "model_name": "",
+                "name": "魅力苏菲",
+                "language": "中文",
+                "style_id": "zh_female_sophie_conversation_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "ee23aeccbdaa453a1c476d30cde315fd",
+                    "preview_text": "Hi, 我在这里陪着你，有心事也可以跟我说哦。",
+                    "preview_audio": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/audio/zh_female_sophie_conversation_wvae_bigtts.wav~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=QXNf20vCmp5Xn2XEbrhYPk%2FGbiw%3D",
+                    "md5": "ee23aeccbdaa453a1c476d30cde315fd",
+                    "preview_audio_uri": "audio/zh_female_sophie_conversation_wvae_bigtts.wav"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1702282436,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/1166209_1705411576796650751.png",
+                    "url": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/1166209_1705411576796650751.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=TO%2BV1Y3gJ1OkewVTZR56AI3mC5U%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_female_sophie_conversation_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "18770280826114",
+                "model_name": "",
+                "name": "撒娇学妹",
+                "language": "中文",
+                "style_id": "zh_female_yuanqinvyou_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "5ada463b7a8829853b0e6a353c81f40c",
+                    "preview_text": "现在的我充满了期待，等会儿一定要好好品尝一下！",
+                    "preview_audio": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1711683727166005533.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=OhHYcUKJiLS6pWhgQTesDCT9kKg%3D",
+                    "md5": "5ada463b7a8829853b0e6a353c81f40c",
+                    "preview_audio_uri": "op_voice/1711683727166005533.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1711683857,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716782748274950098.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716782748274950098.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=CvS5B9gMZKspPngsHq7mAa3uJRk%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 39,
+                        "tag_type": 2,
+                        "tag_value": "少年"
+                    },
+                    {
+                        "tag_id": 148,
+                        "tag_type": 11,
+                        "tag_value": "娇气"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_female_yuanqinvyou_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "76",
+                "model_name": "",
+                "name": "邻家男孩",
+                "language": "中文",
+                "style_id": "zh_male_linjiananhai_moon_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "d61c03ab6b3a6d396c93f34c5f946a01",
+                    "preview_text": "你好，在这里遇到你，感觉挺有缘分的，所以想和你打个招呼。",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1720437990152373288.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=KQ%2BszYiDBtdcrWb9y0dsarvroP4%3D",
+                    "md5": "d61c03ab6b3a6d396c93f34c5f946a01",
+                    "preview_audio_uri": "op_voice/1720437990152373288.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1702282436,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716781798867560420.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716781798867560420.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=qfrXvTHUnce7nHAMQRmJyQ44Bh4%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 141,
+                        "tag_type": 11,
+                        "tag_value": "自信"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_linjiananhai_moon_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "31",
+                "model_name": "",
+                "name": "悠悠君子",
+                "language": "中文",
+                "style_id": "zh_male_M100_conversation_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "372435659dd7e0aa38bf247a7e3c8aff",
+                    "preview_text": "如果你想聊点什么，别犹豫，随时找我。",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/audio/result_zh_male_M100_conversation_wvae_bigtts.wav~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=iI6nubheq9nBvX9Q5ekza%2FoqvfU%3D",
+                    "md5": "372435659dd7e0aa38bf247a7e3c8aff",
+                    "preview_audio_uri": "audio/result_zh_male_M100_conversation_wvae_bigtts.wav"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1702282436,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716780471086000820.png",
+                    "url": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716780471086000820.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=OPCDSfJmBNAetPLFqdf%2BoBs7snU%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 143,
+                        "tag_type": 11,
+                        "tag_value": "谦虚"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_M100_conversation_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "2341563809026",
+                "model_name": "",
+                "name": "温暖阿虎",
+                "language": "中文",
+                "style_id": "zh_male_ahu_conversation_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "7871177aa8cf04a4c1337237e317fc51",
+                    "preview_text": "你好呀，可以随时找我聊天哦。",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1704969116295776972.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=tuddJtnBVD%2BujAMlCjWYaC96nME%3D",
+                    "md5": "7871177aa8cf04a4c1337237e317fc51",
+                    "preview_audio_uri": "op_voice/1704969116295776972.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1704969243,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/1166209_1705411635828175433.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/1166209_1705411635828175433.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=ouOKcLTk9h9hucRkKO%2FdZfjY4cw%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 140,
+                        "tag_type": 11,
+                        "tag_value": "阳光"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_ahu_conversation_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "2339979394818",
+                "model_name": "",
+                "name": "少年梓辛",
+                "language": "中文",
+                "style_id": "zh_male_m286_conversation_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "382d31e0d0ac1c2562a1cb795bd705ad",
+                    "preview_text": "你好，我是梓辛，很高兴认识你",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1704969496648849673.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=nGR49p75a8xWyaz0ce8YC1iLW1k%3D",
+                    "md5": "382d31e0d0ac1c2562a1cb795bd705ad",
+                    "preview_audio_uri": "op_voice/1704969496648849673.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1704969530,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716780944870839118.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716780944870839118.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=hbxpu2FhKaZxeVh0ypCd%2FnPEBR0%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_m286_conversation_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "92790090331138",
+                "model_name": "",
+                "name": "阳光阿辰",
+                "language": "中文",
+                "style_id": "zh_male_qingyiyuxuan_mars_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "76f368ffdfe96de519f48180793877af",
+                    "preview_text": "今天发生了什么让你感到开心的事吗，分享一下吧",
+                    "preview_audio": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1721222869462157208.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=P73gHTkWIOk5JHwnqZPzzUGPTzI%3D",
+                    "md5": "76f368ffdfe96de519f48180793877af",
+                    "preview_audio_uri": "op_voice/1721222869462157208.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1721194892,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/7128072_1721221657098784608.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/7128072_1721221657098784608.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=NPB7H0GC%2FelIdTALSeXo6A3r2cw%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 140,
+                        "tag_type": 11,
+                        "tag_value": "阳光"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_qingyiyuxuan_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "3971344832695810",
+                "model_name": "",
+                "name": "腹黑霸总",
+                "language": "中文",
+                "style_id": "ICL_c021bc19bf92",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "2aa84ae53fdf423dd9bdd1f870ed01a7",
+                    "preview_text": "别老盯着我看，有话直说，我可不喜欢猜别人心思。",
+                    "preview_audio": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1745810588796289363.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=AmEhSXVTDi%2F1rGh7e7kD%2FxcWCiY%3D",
+                    "md5": "2aa84ae53fdf423dd9bdd1f870ed01a7",
+                    "preview_audio_uri": "op_voice/1745810588796289363.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1745812047,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1745810013575403902.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1745810013575403902.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=FLS0zrA%2BWFHqzSzYX6BUFHSrxCQ%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 130,
+                        "tag_type": 11,
+                        "tag_value": "磁性"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_c021bc19bf92",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "3091791067128578",
+                "model_name": "",
+                "name": "冷酷霸总",
+                "language": "中文",
+                "style_id": "ICL_e0b9b93ee322",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "2c91ac59c67f62d67efbd18084de2633",
+                    "preview_text": "一个人呆着久了，突然和你聊聊天，倒也不觉得那么无聊了。",
+                    "preview_audio": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1744771148942987004.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=I5iIPLf3IA80B5kFzRanTu51U4I%3D",
+                    "md5": "2c91ac59c67f62d67efbd18084de2633",
+                    "preview_audio_uri": "op_voice/clone/1744771148942987004.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1744771185,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1744770987157642718.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1744770987157642718.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=rHA3y18Ah4MZw3aPQTDR2DWhA5k%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 130,
+                        "tag_type": 11,
+                        "tag_value": "磁性"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_e0b9b93ee322",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "15811456332290",
+                "model_name": "",
+                "name": "傲娇霸总",
+                "language": "中文",
+                "style_id": "zh_male_aojiaobazong_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "646162b0f64bac5b2e5d87c998a19c6a",
+                    "preview_text": "我想和你慢慢地享受每一个美好的瞬间。",
+                    "preview_audio": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1710919410490227265.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=ng2mvZtNY40ukHQDTj6sw4ycBMQ%3D",
+                    "md5": "646162b0f64bac5b2e5d87c998a19c6a",
+                    "preview_audio_uri": "op_voice/1710919410490227265.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1710919538,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716794784652842111.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716794784652842111.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=Ng9lH%2Bx4z3x6rBOQHug8pjLDAUs%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 159,
+                        "tag_type": 11,
+                        "tag_value": "深情"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_aojiaobazong_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "18633266128130",
+                "model_name": "",
+                "name": "霸道总裁",
+                "language": "中文",
+                "style_id": "ICL_d4d40acd33dd",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "4fa6f05ccb8f3b8cf743a3ff729f0d67",
+                    "preview_text": "不要试图挑战我的权威，否则后果会很严重。",
+                    "preview_audio": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1711944703405171235.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=X8FG8oBiKwrjrHoylrzFaGN795E%3D",
+                    "md5": "4fa6f05ccb8f3b8cf743a3ff729f0d67",
+                    "preview_audio_uri": "op_voice/clone/1711944703405171235.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1711687839,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716782778457549289.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716782778457549289.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=WEoH4ZIKA22biDD%2Bn3eqYMTyK8k%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 160,
+                        "tag_type": 11,
+                        "tag_value": "霸道"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_d4d40acd33dd",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "20644528308581890",
+                "model_name": "",
+                "name": "温柔子言",
+                "language": "中文",
+                "style_id": "zh_male_cheng_mars_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "37335cf8fbc6a7b921012d08879e53a5",
+                    "preview_text": "刚泡好的柠檬水放了点蜜，你尝尝看，甜度刚刚好。",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1758189003702246125.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=pcrGR4WJm7QRvKUALbj0WfPCLBk%3D",
+                    "md5": "37335cf8fbc6a7b921012d08879e53a5",
+                    "preview_audio_uri": "op_voice/1758189003702246125.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1757991626,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/2101112_1757991323352903925.png",
+                    "url": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/2101112_1757991323352903925.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=YFb03ymFQRNGLdcKXgK4EzzUfA4%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_cheng_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "20633949137530626",
+                "model_name": "",
+                "name": "率性阿哲",
+                "language": "中文",
+                "style_id": "zh_male_litiebanzi_mars_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "d42bde96b9fe3e1dc01f15916b4b2756",
+                    "preview_text": "今天有啥新鲜事？跟我说说呗，别藏着掖着。",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1758188975218072472.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=n0ao%2FSukQE39U3IMDiDFF0rfYIY%3D",
+                    "md5": "d42bde96b9fe3e1dc01f15916b4b2756",
+                    "preview_audio_uri": "op_voice/1758188975218072472.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1757991252,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/2101112_1757988970193759915.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/2101112_1757988970193759915.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=5BtGb6IKpKP6BzmUZvCIg4cK5jE%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 152,
+                        "tag_type": 11,
+                        "tag_value": "直率"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_litiebanzi_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "4305611392398338",
+                "model_name": "",
+                "name": "温柔陆辰",
+                "language": "中文",
+                "style_id": "ICL_df4fc4d1ce4b",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "8b8a4925a7b1e7207d4f414958d46db1",
+                    "preview_text": "你好呀，今天遇到什么有趣的事了吗？想聊天可以随时找我哦。",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1746589459846577845.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=dmlH%2FZjx7bERsDcJhMiXTyqHqts%3D",
+                    "md5": "8b8a4925a7b1e7207d4f414958d46db1",
+                    "preview_audio_uri": "op_voice/1746589459846577845.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1746585926,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/2101112_1746590308049376504.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/2101112_1746590308049376504.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=T8O%2BRripz7GuL2np89nQfTshBgo%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 234,
+                        "tag_type": 11,
+                        "tag_value": "奶狗"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_df4fc4d1ce4b",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "15998292245506",
+                "model_name": "",
+                "name": "深夜播客",
+                "language": "中文",
+                "style_id": "zh_male_shenyeboke_wvae_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "71f4bcfbeb46820c4ad83cb00bc68917",
+                    "preview_text": "你害羞的样子很可爱，让我忍不住想要捉弄你一下",
+                    "preview_audio": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1710919791303607042.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=ApmsdZ42m%2F6YW1bWhHdvoGPndBA%3D",
+                    "md5": "71f4bcfbeb46820c4ad83cb00bc68917",
+                    "preview_audio_uri": "op_voice/1710919791303607042.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1710919809,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716782497502931388.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716782497502931388.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=MrM9gk%2FAZHJG0wAizxZ7rvZV2aE%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 164,
+                        "tag_type": 11,
+                        "tag_value": "潇洒"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_shenyeboke_wvae_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "3092232558775554",
+                "model_name": "",
+                "name": "甜美小雪",
+                "language": "中文",
+                "style_id": "ICL_6acf86286e24",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "1869490f6edba3cf02c5b56f22d1fd15",
+                    "preview_text": "你有没有什么特别喜欢的小动物呀？我觉得小兔子就超级可爱的。",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1744771414659490434.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=mTFo3tW9VaZI4IU9R86Msctpfe4%3D",
+                    "md5": "1869490f6edba3cf02c5b56f22d1fd15",
+                    "preview_audio_uri": "op_voice/clone/1744771414659490434.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1744771456,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1744771397087625218.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1744771397087625218.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=7et6EPzoVBUOpMmOoVAru%2FzE1%2Fc%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 125,
+                        "tag_type": 11,
+                        "tag_value": "可爱"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_6acf86286e24",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "3092321416028418",
+                "model_name": "",
+                "name": "清冷阿梦",
+                "language": "中文",
+                "style_id": "ICL_16cd9a58768e",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "425de73e397804eddb326b9cc0c01db1",
+                    "preview_text": "这世间的纷扰，我向来不怎么在意，你呢？",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1744771620641963150.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=CuQCuEHharxDEmwNpqnyK3HA%2BK4%3D",
+                    "md5": "425de73e397804eddb326b9cc0c01db1",
+                    "preview_audio_uri": "op_voice/clone/1744771620641963150.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1744771385,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1744771194672455132.png",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1744771194672455132.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786027488\u0026x-signature=3HmNOy8YMeqCd75Keus8hvSOAr0%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 36,
+                        "tag_type": 1,
+                        "tag_value": "女"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 120,
+                        "tag_type": 11,
+                        "tag_value": "成熟"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_6d6550b0b6f3",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "1704007725058",
+                "model_name": "",
+                "name": "东方浩然",
+                "language": "中文",
+                "style_id": "zh_male_dongfanghaoran_moon_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "b0704c157022a805c0ec3a8d26be14eb",
+                    "preview_text": "我上知天文下知地理，快来和我一起探讨一下吧",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1720423248620207342.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=a0CT%2BuVCV3%2F4%2FVY4RPXAxRhRMKQ%3D",
+                    "md5": "b0704c157022a805c0ec3a8d26be14eb",
+                    "preview_audio_uri": "op_voice/1720423248620207342.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1704264399,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/8188900_1716781606687563083.png",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/8188900_1716781606687563083.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=DXtg8FE8hGE%2FJCshtlujPXDDYmM%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 41,
+                        "tag_type": 2,
+                        "tag_value": "中年"
+                    },
+                    {
+                        "tag_id": 142,
+                        "tag_type": 11,
+                        "tag_value": "坚定"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_dongfanghaoran_moon_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "3092232804622850",
+                "model_name": "",
+                "name": "病娇少爷",
+                "language": "中文",
+                "style_id": "ICL_72afa6c5dc07",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "3aaeea01d6510027ca5217d3f9f185df",
+                    "preview_text": "跟我讲讲你今天发生的事吧，你生活里的一切，我都要参与，不准有秘密。",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1744770936577643107.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=UnPwhNmHTFzlAI0oFoJrDB3LrUM%3D",
+                    "md5": "3aaeea01d6510027ca5217d3f9f185df",
+                    "preview_audio_uri": "op_voice/clone/1744770936577643107.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1744770978,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1744770700665444518.png",
+                    "url": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1744770700665444518.png~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=TK9whVmDJ9Uf62xZMh15a%2FqnaIQ%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 158,
+                        "tag_type": 11,
+                        "tag_value": "疯批"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_72afa6c5dc07",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "92617757524738",
+                "model_name": "",
+                "name": "清爽男大",
+                "language": "中文",
+                "style_id": "zh_male_junlangxize_mars_bigtts",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "7dfa8ac904c701e31ff2dd864db4563c",
+                    "preview_text": "今天的天气真好，突然想到了你，不知道你那边怎么样？",
+                    "preview_audio": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/1721221877739572937.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=Htj9CjRCCeAO66SD1qytXOFo1Ck%3D",
+                    "md5": "7dfa8ac904c701e31ff2dd864db4563c",
+                    "preview_audio_uri": "op_voice/1721221877739572937.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1721195163,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/7128072_1721221837885587149.jpeg",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/7128072_1721221837885587149.jpeg~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=zutv61%2FS3LuiPyByYHdNA%2FcXriY%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 139,
+                        "tag_type": 11,
+                        "tag_value": "温柔"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "zh_male_junlangxize_mars_bigtts",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "1551728731854082",
+                "model_name": "",
+                "name": "清朗宇澄",
+                "language": "中文",
+                "style_id": "ICL_9b3bc6941076",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "48553d4a61a4966165b1489f495fe80e",
+                    "preview_text": "我突然很好奇，你最喜欢的季节是哪个呢？有什么特别的原因吗？",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1743044766455763660.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=CWtCbpGbgxyJZYq8AGqHpvdR5dE%3D",
+                    "md5": "48553d4a61a4966165b1489f495fe80e",
+                    "preview_audio_uri": "op_voice/clone/1743044766455763660.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1741142710,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1741142631342370393.jpg",
+                    "url": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1741142631342370393.jpg~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=8choptPGCWrvK4WyZywCiONlXX4%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 222,
+                        "tag_type": 11,
+                        "tag_value": "帅气"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_9b3bc6941076",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "1615285353850626",
+                "model_name": "",
+                "name": "奶音俊少",
+                "language": "中文",
+                "style_id": "ICL_932b3f52bf3d",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "814e11334623954d4cf27eed66beb919",
+                    "preview_text": "最近有没有什么能让你单曲循环的歌呢？可以给我推荐推荐吗？",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1741578220090906397.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=d0iTww2ss4cC%2Brl8DtDgXpVXmww%3D",
+                    "md5": "814e11334623954d4cf27eed66beb919",
+                    "preview_audio_uri": "op_voice/clone/1741578220090906397.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1741143038,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1741142928442197611.jpg",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1741142928442197611.jpg~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=JBx5626nzEQ%2B0ixVChZGX6fbzpc%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 211,
+                        "tag_type": 11,
+                        "tag_value": "奶声奶气"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_932b3f52bf3d",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "870127902216450",
+                "model_name": "",
+                "name": "沉稳皓轩",
+                "language": "中文",
+                "style_id": "ICL_5a413fbc14fc",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "9d6d287b99b53d2556b7df5e83bafed2",
+                    "preview_text": "生活中难免会有不如意，要是碰上烦心事，别一个人扛着，我会一直在这儿倾听。",
+                    "preview_audio": "https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1737516242767713722.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=RVZvyzi9XFHyQEq%2BWUpycplwtjU%3D",
+                    "md5": "9d6d287b99b53d2556b7df5e83bafed2",
+                    "preview_audio_uri": "op_voice/clone/1737516242767713722.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1737516342,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1737516210114832650.jpg",
+                    "url": "https://p6-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1737516210114832650.jpg~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=pPC6V9NDI8pOKkGbXkCnuABcZqo%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 130,
+                        "tag_type": 11,
+                        "tag_value": "磁性"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_5a413fbc14fc",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "1551957662395650",
+                "model_name": "",
+                "name": "温柔俊彦",
+                "language": "中文",
+                "style_id": "ICL_0ce6ef379e73",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "7b0c0740a8464a9cddd4d273ae318fde",
+                    "preview_text": "最近天气多变，你要注意增减衣物哦，今天感觉冷吗？",
+                    "preview_audio": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1743044881610960051.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=gLHkca8%2Ba4M3T5ANyvqwaruKgAs%3D",
+                    "md5": "7b0c0740a8464a9cddd4d273ae318fde",
+                    "preview_audio_uri": "op_voice/clone/1743044881610960051.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1741143232,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1741143083366207899.jpg",
+                    "url": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1741143083366207899.jpg~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=tJYIQrwAG2nHVYDkWQxsclxAZRs%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 213,
+                        "tag_type": 11,
+                        "tag_value": "善良"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_0ce6ef379e73",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            },
+            {
+                "id": "1551876235983362",
+                "model_name": "",
+                "name": "青涩沐阳",
+                "language": "中文",
+                "style_id": "ICL_afedffe4586c",
+                "style_name": "",
+                "language_code": "zh",
+                "language_key": "",
+                "preview": {
+                    "version": "c6a798f7006d25e10ec85a39cd8d3bc2",
+                    "preview_text": "今天过得怎么样呀？即使生活很忙，也要记得休息放松哦。",
+                    "preview_audio": "https://p26-flow-imagex-sign.byteimg.com/ocean-cloud-tos/op_voice/clone/1743044671362252151.mp3~tplv-a9rns2rl98-image.image?rrcfp=e7510461\u0026x-expires=1786073752\u0026x-signature=EkhdZP31vJNp3GZXsvOSjkaUCoQ%3D",
+                    "md5": "c6a798f7006d25e10ec85a39cd8d3bc2",
+                    "preview_audio_uri": "op_voice/clone/1743044671362252151.mp3"
+                },
+                "creator_id": "4427048924229208",
+                "status": 1,
+                "private_status": 1,
+                "ugc_voice": false,
+                "create_time": 1741142567,
+                "creator_username": "豆包官方",
+                "icon": {
+                    "uri": "FileBizType.BIZ_BOT_ICON/6591786_1741142452968399480.jpg",
+                    "url": "https://p11-flow-imagex-sign.byteimg.com/ocean-cloud-tos/FileBizType.BIZ_BOT_ICON/6591786_1741142452968399480.jpg~tplv-a9rns2rl98-image.image?rrcfp=ed010911\u0026x-expires=1786026357\u0026x-signature=0WI68%2FPOG5zEiIP5WxUsr8PoOYA%3D"
+                },
+                "name_status": 1,
+                "heat_score": 0,
+                "display_heat_score": "",
+                "tag_list": [
+                    {
+                        "tag_id": 37,
+                        "tag_type": 1,
+                        "tag_value": "男"
+                    },
+                    {
+                        "tag_id": 40,
+                        "tag_type": 2,
+                        "tag_value": "青年"
+                    },
+                    {
+                        "tag_id": 116,
+                        "tag_type": 11,
+                        "tag_value": "明亮"
+                    }
+                ],
+                "allow_mix": true,
+                "voice_conf_status": 0,
+                "mix_voice_list": [],
+                "pitch": 0,
+                "speech_rate": 0,
+                "style_id_phone_call": "ICL_afedffe4586c",
+                "pitch_f64": 0,
+                "speech_rate_f64": 0
+            }
+        ],
+        "has_more": true
+    },
+    "rec_status": -1
+}

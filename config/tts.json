@@ -1,0 +1,15 @@
+{
+  "aid": 497858,
+  "pc_version": "3.11.1",
+  "language": "zh",
+  "device_platform": "web",
+  "region": "CN",
+  "sys_region": "CN",
+  "use_olympus_account": 1,
+  "pkg_type": "release_version",
+  "base_timeout_ms": 30000,
+  "timeout_ms_per_char": 100,
+  "max_retries": 2,
+  "requestIntervalDelay": 1,
+  "requestDelay": 15
+}

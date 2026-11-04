@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅读TTS配置中心 - DoBao TTS</title>
+    <!-- 主题预加载脚本 - 防止闪烁 -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (savedTheme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/console.css">
+    <link rel="stylesheet" href="/css/legado-tts.css">
+    <link rel="stylesheet" href="/css/prefab-book-v2.css">
+    <link rel="stylesheet" href="/css/mobile-fix.css">
+    <link rel="stylesheet" href="/css/onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="app-title">
+                        <i class="fas fa-book-reader app-icon"></i>
+                        <span>阅读TTS配置</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="header-btn" title="返回首页">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 应用主体 -->
+        <div class="app-body">
+            <main class="main-content">
+                <div class="content-section active">
+                    <!-- Hero 区域 - 简化版 -->
+                    <div class="page-hero-simple">
+                        <div class="hero-header">
+                            <h1>
+                                <i class="fas fa-book-reader"></i>
+                                阅读TTS配置
+                            </h1>
+                            <p>快速配置语音合成引擎，一键导入到阅读APP</p>
+                        </div>
+
+                    </div>
+
+                    <!-- 模式切换选项卡 -->
+                    <div class="mode-tabs">
+                        <button class="mode-tab active" data-mode="realtime">
+                            <i class="fas fa-clock"></i>
+                            实时模式
+                        </button>
+                        <button class="mode-tab" data-mode="prefab">
+                            <i class="fas fa-book-open"></i>
+                            预制书模式
+                        </button>
+                    </div>
+
+                    <!-- 双栏布局 - 实时模式 -->
+                    <div class="content-layout" id="realtimeModeContent">
+                        <!-- 左侧：配置面板 -->
+                        <div class="config-panel">
+                            <!-- 配置模板选择器 -->
+                            <div class="template-selector">
+                                <label class="section-label">
+                                    <i class="fas fa-layer-group"></i>
+                                    快速配置模板
+                                </label>
+                                <div class="template-grid">
+                                    <button class="template-card" data-template="default">
+                                        <i class="fas fa-star"></i>
+                                        <span>默认配置</span>
+                                    </button>
+                                    <button class="template-card" data-template="fast">
+                                        <i class="fas fa-bolt"></i>
+                                        <span>快速模式</span>
+                                    </button>
+                                    <button class="template-card" data-template="quality">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>安全模式</span>
+                                    </button>
+                                    <button class="template-card active" data-template="custom">
+                                        <i class="fas fa-sliders-h"></i>
+                                        <span>自定义</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 基础配置卡片 -->
+                            <div class="config-section">
+                                <div class="section-header">
+                                    <h3>
+                                        <i class="fas fa-sliders-h"></i>
+                                        基础配置
+                                    </h3>
+                                </div>
+                                
+                                <div class="section-body">
+                                  
+                                    <!-- 发音人选择 -->
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="fas fa-user-circle"></i>
+                                            选择发音人
+                                            <span class="required">*</span>
+                                        </label>
+                                        <div class="voice-selector">
+                                            <select id="voiceSelect" class="form-select">
+                                                <option value="">请选择发音人...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                      <!-- 配置提示 -->
+                                    <div class="config-tips">
+                                        <div class="tip-item">
+                                            <i class="fas fa-lightbulb"></i>
+                                            <span>选择发音人后，可调整请求延迟来平衡速度和稳定性</span>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <!-- 请求延迟 -->
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <i class="fas fa-clock"></i>
+                                            请求延迟
+                                        </label>
+                                        <div class="delay-control">
+                                            <input type="range" id="delaySlider" min="0" max="60" value="5" class="form-slider">
+                                            <div class="delay-value">
+                                                <span id="delayValue">5</span>秒
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!-- 右侧：预览/状态区 -->
+                        <div class="preview-panel">
+                            <!-- 配置预览卡片 - 简化版 -->
+                            <div class="preview-card sticky">
+                                <div class="preview-header">
+                                    <h3>
+                                        <i class="fas fa-check-circle"></i>
+                                        配置状态
+                                    </h3>
+                                </div>
+                                
+                                <div class="preview-body">
+                                    <!-- 验证状态 -->
+                                    <div class="validation-status error" id="validationStatus">
+                                        <div class="status-icon">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </div>
+                                        <div class="status-text">
+                                            <strong>配置未完成</strong>
+                                            <p>请选择发音人</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- 配置摘要 -->
+                                    <div class="config-summary">
+                                        <div class="summary-item">
+                                            <i class="fas fa-user-circle"></i>
+                                            <div class="summary-content">
+                                                <span class="summary-label">发音人</span>
+                                                <span class="summary-value" id="summaryVoice">未选择</span>
+                                            </div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <i class="fas fa-clock"></i>
+                                            <div class="summary-content">
+                                                <span class="summary-label">延迟</span>
+                                                <span class="summary-value" id="summaryDelay">5秒</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 主操作区 -->
+                                <div class="preview-footer">
+                                    <div class="mobile-tip" id="mobileTipRealtime" style="margin-bottom: 12px; padding: 10px 12px; background: var(--bg-secondary); border-radius: 8px; border-left: 3px solid var(--info-color);">
+                                        <i class="fas fa-mobile-alt" style="color: var(--info-color); margin-right: 8px;"></i>
+                                        <span style="font-size: 0.8125rem; color: var(--text-secondary);">请在手机上使用浏览器访问本页面，才能使用一键导入功能，修改任意参数均需要重新一键导入</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-block btn-lg" id="mainImportBtn" disabled>
+                                        <i class="fas fa-rocket"></i>
+                                        一键导入到阅读
+                                    </button>
+                                    <div class="secondary-actions">
+                                        <button class="btn btn-secondary btn-sm" id="testConfigBtn">
+                                            <i class="fas fa-vial"></i>
+                                            测试配置
+                                        </button>
+                                        <button class="btn btn-secondary btn-sm" id="copyConfigBtn">
+                                            <i class="fas fa-copy"></i>
+                                            复制链接
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 手动导入提示区 - 默认隐藏 -->
+                            <div class="import-fallback-section" id="fallbackSection" style="display: none;">
+                                <div class="fallback-header">
+                                    <h4>
+                                        <i class="fas fa-hand-point-right"></i>
+                                        未能自动唤起APP？
+                                    </h4>
+                                </div>
+                                <div class="fallback-body">
+                                    <p class="fallback-hint">请手动复制以下链接，在阅读APP中导入：</p>
+                                    <div class="fallback-url-box">
+                                        <input type="text" id="fallbackUrlInput" class="fallback-input" readonly>
+                                        <button class="btn btn-primary btn-sm" id="fallbackCopyBtn">
+                                            <i class="fas fa-copy"></i>
+                                            复制
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm btn-block" id="fallbackCloseBtn">
+                                        <i class="fas fa-times"></i>
+                                        关闭
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 双栏布局 - 预制书模式 V3 -->
+                    <div class="prefab-v2" id="prefabModeContent" style="display: none;">
+                        <!-- 左侧：主内容区 -->
+                        <div class="prefab-main">
+                            <!-- 连接设置卡片 - 精简版 -->
+                            <div class="prefab-card">
+                                <div class="prefab-card__header">
+                                    <div class="prefab-card__title">
+                                        <div class="prefab-card__title-icon">
+                                            <i class="fas fa-database"></i>
+                                        </div>
+                                        数据来源
+                                    </div>
+                                    <!-- 模式切换选项卡嵌入标题栏 -->
+                                    <div class="prefab-source-tabs-inline">
+                                        <button class="prefab-source-tab-inline active" data-source="web" title="连接阅读APP">
+                                            <i class="fas fa-network-wired"></i>
+                                        </button>
+                                        <button class="prefab-source-tab-inline" data-source="txt" title="上传TXT文件">
+                                            <i class="fas fa-file-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="prefab-card__body">
+                                    <!-- Web连接内容 -->
+                                    <div id="prefabWebContent">
+                                        <div class="prefab-settings__row">
+                                            <div class="prefab-field">
+                                                <label class="prefab-field__label">服务器IP</label>
+                                                <input type="text" id="prefabServerIp" class="prefab-input" placeholder="例如：192.168.0.110" value="">
+                                            </div>
+                                            <div class="prefab-field">
+                                                <label class="prefab-field__label">端口</label>
+                                                <input type="number" id="prefabServerPort" class="prefab-input" placeholder="例：1122" value="1122" min="1" max="65535">
+                                            </div>
+                                        </div>
+                                        <button class="prefab-btn prefab-btn--primary" id="refreshBooksBtn" style="width: 100%; margin-top: 12px;">
+                                            <i class="fas fa-sync-alt"></i>
+                                            连接
+                                        </button>
+                                    </div>
+
+                                    <!-- TXT上传内容 -->
+                                    <div id="prefabTxtContent" style="display: none;">
+                                        <!-- 文件上传区域 -->
+                                        <div class="txt-upload-area" id="txtUploadArea">
+                                            <input type="file" id="txtFileInput" accept=".txt" style="display: none;">
+                                            <div class="txt-upload-content">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p class="txt-upload-text">点击或拖拽上传TXT文件</p>
+                                                <p class="txt-upload-hint">支持 .txt 格式，最大 50MB</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- 文件信息展示（上传后显示） -->
+                                        <div class="txt-file-info" id="txtFileInfo" style="display: none;">
+                                            <div class="txt-file-header">
+                                                <i class="fas fa-file-alt"></i>
+                                                <span class="txt-file-name" id="txtFileName"></span>
+                                                <button class="txt-file-remove" id="txtFileRemove" title="移除文件">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="txt-file-meta">
+                                                <span id="txtFileSize"></span>
+                                                <span class="txt-file-divider">|</span>
+                                                <span id="txtChapterCount"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 书籍库卡片 - 统一显示Web和TXT书籍 -->
+                            <div class="prefab-card" id="bookSelectorContainer">
+                                <div class="prefab-card__header">
+                                    <div class="prefab-card__title">
+                                        <div class="prefab-card__title-icon">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        书籍库
+                                    </div>
+                                    <div class="prefab-card__actions">
+                                        <button class="prefab-icon-btn" id="viewCacheManagerBtn" title="缓存管理">
+                                            <i class="fas fa-database"></i>
+                                        </button>
+                                        <button class="prefab-icon-btn" id="viewPrefetchManagerBtn" title="预制任务管理" style="margin-left: 8px;">
+                                            <i class="fas fa-magic"></i>
+                                        </button>
+                                        <button class="prefab-icon-btn" id="viewPrefetchedContentBtn" title="已预制内容管理" style="margin-left: 8px;">
+                                            <i class="fas fa-archive"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="prefab-card__body">
+                                    <div class="prefab-library" id="bookshelfGrid">
+                                        <!-- 书籍卡片通过JS动态生成 -->
+                                    </div>
+                                    <div class="prefab-empty" id="bookshelfEmpty">
+                                        <div class="prefab-empty__icon">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <div class="prefab-empty__title">暂无书籍</div>
+                                        <div class="prefab-empty__desc">请先连接Web服务或上传TXT文件</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 章节列表卡片 - 复用现有的 -->
+                            <div class="prefab-card" id="chapterSelectorContainer" style="display: none;">
+                                <div class="prefab-card__header">
+                                    <div class="prefab-card__title">
+                                        <div class="prefab-card__title-icon">
+                                            <i class="fas fa-list-ol"></i>
+                                        </div>
+                                        章节列表
+                                    </div>
+                                    <div class="prefab-card__actions">
+                                        <button class="prefab-btn prefab-btn--ghost" id="selectToEndBtn" style="height: 36px; padding: 0 12px; font-size: 0.8125rem;" title="从当前选中勾选至章底">
+                                            <i class="fas fa-check-double"></i>
+                                            选至末尾
+                                        </button>
+                                        <button class="prefab-btn prefab-btn--ghost" id="clearSelectionBtn" style="height: 36px; padding: 0 12px; font-size: 0.8125rem;" title="清空选择">
+                                            <i class="fas fa-times-circle"></i>
+                                            清空
+                                        </button>
+                                        <button class="prefab-btn prefab-btn--ghost" id="backToBookshelfBtn" style="height: 36px; padding: 0 16px; font-size: 0.875rem;">
+                                            <i class="fas fa-arrow-left"></i>
+                                            返回
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="prefab-card__body">
+                                    <div class="prefab-chapters-toolbar" id="chapterToolbar" style="display: none;">
+                                        <span class="prefab-chapters-count">已选 <strong id="selectedChapterCount">0</strong> 章</span>
+                                    </div>
+                                    <div class="prefab-chapters" id="chapterList">
+                                        <!-- 章节列表通过JS动态生成 -->
+                                    </div>
+                                    <div class="prefab-empty" id="chapterListEmpty" style="display: none;">
+                                        <div class="prefab-empty__icon">
+                                            <i class="fas fa-list-ol"></i>
+                                        </div>
+                                        <div class="prefab-empty__title">暂无章节</div>
+                                        <div class="prefab-empty__desc">该书籍暂无可读章节</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 右侧：双栏布局（预制设置 + 处理信息） -->
+                        <div class="prefab-right">
+                            <!-- 左栏：预制设置 -->
+                            <div class="prefab-settings-panel">
+                                <div class="prefab-panel-header">
+                                    <div class="prefab-panel-icon">
+                                        <i class="fas fa-sliders-h"></i>
+                                    </div>
+                                    <div class="prefab-panel-title">预制设置</div>
+                                    <div class="prefab-panel-subtitle" id="prefabValidationStatus">请完成配置</div>
+                                </div>
+
+                                <!-- 参数配置 -->
+                                <div class="prefab-panel-section">
+                                    <div class="prefab-section-label">
+                                        <i class="fas fa-cog"></i>
+                                        参数配置
+                                    </div>
+                                    
+                                    <div class="prefab-fields">
+                                        <!-- 发音人选择 -->
+                                        <div class="prefab-field-row">
+                                            <label class="prefab-field-label">
+                                                <i class="fas fa-microphone"></i>
+                                                发音人
+                                            </label>
+                                            <select id="prefabVoiceSelect" class="prefab-field-select">
+                                                <option value="">请选择发音人...</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- 语速 -->
+                                        <div class="prefab-field-row">
+                                            <label class="prefab-field-label">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                语速
+                                                <span class="prefab-field-value" id="prefabSpeedValue">正常</span>
+                                            </label>
+                                            <input type="range" id="prefabSpeedSlider" class="prefab-field-slider" min="-50" max="100" value="0">
+                                        </div>
+
+                                        <!-- 请求延迟 -->
+                                        <div class="prefab-field-row">
+                                            <label class="prefab-field-label">
+                                                <i class="fas fa-clock"></i>
+                                                请求延迟
+                                                <span class="prefab-field-value" id="prefabDelayValue">50秒</span>
+                                            </label>
+                                            <input type="range" id="prefabDelaySlider" class="prefab-field-slider" min="50" max="100" value="50">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 当前选择 -->
+                                <div class="prefab-panel-section">
+                                    <div class="prefab-section-label">
+                                        <i class="fas fa-info-circle"></i>
+                                        当前选择
+                                    </div>
+                                    
+                                    <div class="prefab-selection-list">
+                                        <div class="prefab-selection-item">
+                                            <i class="fas fa-microphone"></i>
+                                            <span class="prefab-selection-label">发音人</span>
+                                            <span class="prefab-selection-value" id="prefabSummaryVoice">未选择</span>
+                                        </div>
+                                        <div class="prefab-selection-item">
+                                            <i class="fas fa-book"></i>
+                                            <span class="prefab-selection-label">书籍</span>
+                                            <span class="prefab-selection-value" id="prefabSummaryBookName">未选择</span>
+                                        </div>
+                                        <div class="prefab-selection-item">
+                                            <i class="fas fa-list-ol"></i>
+                                            <span class="prefab-selection-label">章节</span>
+                                            <span class="prefab-selection-value" id="prefabSummaryChapter">未选择</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="prefab-panel-actions">
+                                    <button class="prefab-btn prefab-btn--primary" id="startProcessingBtn" disabled>
+                                        <i class="fas fa-play"></i>
+                                        开始预制
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 右栏：处理信息 + 控制台 -->
+                            <div class="prefab-info-panel">
+                                <!-- 处理进度卡片 -->
+                                <div class="prefab-progress-card" id="processingProgressCard">
+                                    <div class="prefab-progress-card__header">
+                                        <div class="prefab-progress-card__icon">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <div class="prefab-progress-card__title">处理中</div>
+                                        <div class="prefab-progress-card__subtitle" id="processingCurrentStatus">准备中...</div>
+                                    </div>
+
+                                    <div class="prefab-progress-card__bar">
+                                        <div class="prefab-progress-track">
+                                            <div id="processingProgressBar" class="prefab-progress-fill" style="width: 0%;"></div>
+                                        </div>
+                                        <div class="prefab-progress-numbers">
+                                            <span id="processingProgressText">0%</span>
+                                            <span id="processingProgressCount">0/0</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="prefab-progress-card__stats">
+                                        <div class="prefab-stat-row">
+                                            <i class="fas fa-clock"></i>
+                                            <span>已用时间</span>
+                                            <span class="prefab-stat-time" id="processingElapsedTime">00:00:00</span>
+                                        </div>
+                                        <div class="prefab-stat-row">
+                                            <i class="fas fa-hourglass-half"></i>
+                                            <span>预计剩余</span>
+                                            <span class="prefab-stat-time" id="processingRemainingTime">--:--:--</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="prefab-progress-card__actions">
+                                        <button class="prefab-btn-sm prefab-btn-sm--secondary" id="pauseProcessingBtn">
+                                            <i class="fas fa-pause"></i>
+                                            暂停
+                                        </button>
+                                        <button class="prefab-btn-sm prefab-btn-sm--danger" id="cancelProcessingBtn">
+                                            <i class="fas fa-stop"></i>
+                                            取消
+                                        </button>
+                                    </div>
+
+                                    <!-- 在线朗读引擎导入按钮 -->
+                                    <div class="prefab-engine-actions" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                                        <div style="font-size: 0.6875rem; color: var(--text-secondary); margin-bottom: 8px; text-align: center;">
+                                            <i class="fas fa-book-reader"></i> 在线朗读引擎
+                                        </div>
+                                        <div class="mobile-tip" id="mobileTipPrefab" style="margin-bottom: 8px; padding: 6px 8px; background: var(--bg-secondary); border-radius: 5px; border-left: 3px solid var(--info-color);">
+                                            <i class="fas fa-mobile-alt" style="color: var(--info-color); margin-right: 5px; font-size: 0.6875rem;"></i>
+                                            <span style="font-size: 0.6875rem; color: var(--text-secondary);">请在手机上使用浏览器访问，才能使用一键导入</span>
+                                        </div>
+                                        <button class="prefab-btn prefab-btn--primary" id="prefabImportBtn" style="width: 100%; margin-bottom: 6px;">
+                                            <i class="fas fa-rocket"></i>
+                                            一键导入到阅读
+                                        </button>
+                                        <button class="prefab-btn prefab-btn--secondary" id="prefabCopyLinkBtn" style="width: 100%;">
+                                            <i class="fas fa-copy"></i>
+                                            复制导入链接
+                                        </button>
+                                    </div>
+
+                                    <!-- 手动导入提示区 - 默认隐藏 -->
+                                    <div class="prefab-import-fallback" id="prefabImportFallback" style="display: none; margin-top: 10px; padding: 10px; background: var(--bg-secondary); border-radius: 6px;">
+                                        <div style="font-size: 0.6875rem; color: var(--text-secondary); margin-bottom: 6px;">
+                                            <i class="fas fa-hand-point-right"></i> 未能自动唤起APP？请手动复制以下链接：
+                                        </div>
+                                        <div style="display: flex; gap: 6px; align-items: center;">
+                                            <input type="text" id="prefabImportUrlInput" class="prefab-input" readonly style="flex: 1; font-size: 0.6875rem; height: 32px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 缓存进度弹窗 -->
+                    <div class="prefab-cache-modal" id="bookCacheProgressModal">
+                        <div class="prefab-cache-modal__content">
+                            <div class="prefab-cache-modal__header">
+                                <div class="prefab-cache-modal__title">
+                                    <i class="fas fa-download"></i>
+                                    <span id="bookCacheProgressTitle">正在缓存书籍...</span>
+                                </div>
+                                <button class="prefab-cache-modal__close" id="closeBookCacheProgressModal" title="关闭">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="prefab-cache-modal__body">
+                                <div style="margin: 20px 0;">
+                                    <div style="height: 8px; background: var(--bg-tertiary); border-radius: 4px; overflow: hidden;">
+                                        <div id="bookCacheProgressBar" style="height: 100%; background: var(--primary-gradient); border-radius: 4px; width: 0%; transition: width 0.3s ease;"></div>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.8125rem; color: var(--text-secondary);">
+                                        <span id="bookCacheProgressText">0%</span>
+                                        <span id="bookCacheProgressCount">0/0</span>
+                                    </div>
+                                </div>
+                                <div id="bookCacheProgressDetail" style="text-align: center; color: var(--text-secondary); font-size: 0.875rem; margin-top: 10px;">
+                                    准备中...
+                                </div>
+                                <div id="bookCacheProgressSkipped" style="text-align: center; color: var(--success-color); font-size: 0.75rem; margin-top: 8px; display: none;">
+                                    已跳过 0 个已缓存章节
+                                </div>
+                                <!-- 取消缓存按钮 -->
+                                <div id="bookCacheCancelContainer" style="text-align: center; margin-top: 16px; position: relative; z-index: 1001;">
+                                    <button id="bookCacheCancelBtn" class="btn btn--secondary" style="padding: 8px 20px; font-size: 0.875rem; cursor: pointer; position: relative; z-index: 1002;" type="button">
+                                        <i class="fas fa-stop-circle"></i> 取消缓存
+                                    </button>
+                                </div>
+                                <div id="bookCacheCancellingMsg" style="text-align: center; color: var(--warning-color); font-size: 0.875rem; margin-top: 16px; display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i> 正在取消，等待当前章节完成...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 缓存管理弹窗 -->
+                    <div class="prefab-cache-modal" id="cacheManagerModal">
+                        <div class="prefab-cache-modal__content">
+                            <div class="prefab-cache-modal__header">
+                                <div class="prefab-cache-modal__title">
+                                    <i class="fas fa-database"></i>
+                                    书籍缓存管理
+                                </div>
+                                <button class="prefab-cache-modal__close" id="closeCacheModal">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="prefab-cache-modal__body" id="cacheManagerBody">
+                                <!-- 缓存列表通过JS动态生成 -->
+                                <div class="prefab-empty">
+                                    <div class="prefab-empty__icon">
+                                        <i class="fas fa-inbox"></i>
+                                    </div>
+                                    <div class="prefab-empty__title">暂无缓存</div>
+                                    <div class="prefab-empty__desc">点击书籍上的缓存按钮可以缓存整本书</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 预制管理弹窗 -->
+                    <div class="prefab-cache-modal" id="prefetchManagerModal">
+                        <div class="prefab-cache-modal__content">
+                            <!-- 一级页面：总任务列表 -->
+                            <div id="prefetchLevel1" class="prefetch-level">
+                                <div class="prefab-cache-modal__header">
+                                    <div class="prefab-cache-modal__title">
+                                        <i class="fas fa-magic"></i>
+                                        预制任务管理
+                                    </div>
+                                    <button class="prefab-cache-modal__close" id="closePrefetchModal">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="prefab-cache-modal__body" id="prefetchManagerBody">
+                                    <!-- 总任务列表通过JS动态生成 -->
+                                    <div class="prefab-empty">
+                                        <div class="prefab-empty__icon">
+                                            <i class="fas fa-inbox"></i>
+                                        </div>
+                                        <div class="prefab-empty__title">暂无预制任务</div>
+                                        <div class="prefab-empty__desc">在预制书模式下选择章节并开始预制</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 二级页面：子任务列表 -->
+                            <div id="prefetchLevel2" class="prefetch-level" style="display: none;">
+                                <div class="prefab-cache-modal__header">
+                                    <button class="prefetch-back-btn" onclick="backToPrefetchLevel1()">
+                                        <i class="fas fa-arrow-left"></i>
+                                        返回
+                                    </button>
+                                    <div class="prefab-cache-modal__title" id="prefetchLevel2Title">
+                                        <i class="fas fa-tasks"></i>
+                                        子任务列表
+                                    </div>
+                                    <button class="prefab-cache-modal__close" onclick="closePrefetchModal()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="prefab-cache-modal__body" id="prefetchSubTaskBody">
+                                    <!-- 子任务列表通过JS动态生成 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 已预制内容管理弹窗 -->
+                    <div class="prefab-cache-modal" id="prefetchedContentModal">
+                        <div class="prefab-cache-modal__content">
+                            <div class="prefab-cache-modal__header">
+                                <div class="prefab-cache-modal__title">
+                                    <i class="fas fa-archive"></i>
+                                    已预制内容管理
+                                </div>
+                                <button class="prefab-cache-modal__close" id="closePrefetchedContentModal">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="prefab-cache-modal__body" id="prefetchedContentBody">
+                                <!-- 已预制内容列表通过JS动态生成 -->
+                                <div class="prefab-empty">
+                                    <div class="prefab-empty__icon">
+                                        <i class="fas fa-archive"></i>
+                                    </div>
+                                    <div class="prefab-empty__title">暂无已预制内容</div>
+                                    <div class="prefab-empty__desc">完成预制任务后，内容将显示在这里</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- 引入主题脚本 -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/legado-tts.js"></script>
+    <!-- 引入新手引导脚本 -->
+    <script src="/js/onboarding.js"></script>
+</body>
+</html>

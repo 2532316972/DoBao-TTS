@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie管理 - DoBao TTS</title>
+    <!-- 主题预加载脚本 - 防止闪烁 -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (savedTheme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/console.css">
+    <link rel="stylesheet" href="/css/cookies.css">
+    <link rel="stylesheet" href="/css/mobile-fix.css">
+    <link rel="stylesheet" href="/css/onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="app-title">
+                        <i class="fas fa-cookie-bite app-icon"></i>
+                        <span>Cookie管理</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="header-btn" title="返回首页">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <button class="header-btn" id="refreshCookies" title="刷新Cookie列表">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 应用主体 -->
+        <div class="app-body">
+            <!-- 主内容区域 -->
+            <main class="main-content">
+                <div class="content-section active">
+                    <div class="section-header">
+                        <div class="section-title-group">
+                            <h1 class="section-title">Cookie管理</h1>
+                            <p class="section-description">管理和监控 TTS 服务的 Cookie 配置</p>
+                        </div>
+                        <div class="section-actions">
+                            <button class="btn btn-primary" id="qrLoginBtn">
+                                <i class="fas fa-qrcode"></i>
+                                二维码获取
+                            </button>
+                            <button class="btn btn-secondary" id="addCookieBtn">
+                                <i class="fas fa-plus"></i>
+                                手动添加
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <!-- Cookie统计卡片网格 -->
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-cookie-bite"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="totalCookies">0</div>
+                                    <div class="stat-label">Cookie总数</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon valid">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="validCookies">0</div>
+                                    <div class="stat-label">有效Cookie</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon invalid">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="invalidCookies">0</div>
+                                    <div class="stat-label">无效Cookie</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon disabled">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="disabledCookies">0</div>
+                                    <div class="stat-label">已禁用</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon active">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="activeCookie">-</div>
+                                    <div class="stat-label">当前使用</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cookie列表卡片 -->
+                        <div class="info-card">
+                            <!-- 搜索和筛选工具栏 -->
+                            <div class="cookie-toolbar">
+                                <div class="toolbar-left">
+                                    <label class="checkbox-wrapper">
+                                        <input type="checkbox" id="selectAllCookies">
+                                        <span class="checkbox-custom"></span>
+                                        <span class="checkbox-label">多选</span>
+                                    </label>
+                                    <div class="search-box">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="searchInput" placeholder="搜索Cookie名称或描述...">
+                                    </div>
+                                </div>
+                                <div class="toolbar-right">
+                                    <select id="sortSelect" class="sort-select">
+                                        <option value="name">按名称排序</option>
+                                        <option value="usageCount">按使用次数</option>
+                                        <option value="createdAt">按创建时间</option>
+                                    </select>
+                                    <button class="btn-icon" id="sortOrderBtn" title="切换排序顺序">
+                                        <i class="fas fa-sort-amount-down"></i>
+                                    </button>
+                                    <button class="btn-icon" id="viewModeBtn" title="切换视图模式">
+                                        <i class="fas fa-th-large"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 批量操作工具栏 -->
+                            <div class="batch-toolbar" id="batchToolbar" style="display: none;">
+                                <div class="batch-info">
+                                    <span class="batch-count">已选择 <strong id="selectedCount">0</strong> 个Cookie</span>
+                                </div>
+                                <div class="batch-actions">
+                                    <button class="btn btn-info btn-sm" id="batchTestBtn" title="批量检测">
+                                        <i class="fas fa-flask"></i>
+                                        <span>检测</span>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" id="batchDeleteBtn" title="批量删除">
+                                        <i class="fas fa-trash"></i>
+                                        <span>删除</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Cookie列表容器 -->
+                            <div class="cookie-list-wrapper">
+                                <div class="cookie-list" id="cookieList">
+                                    <!-- Cookie项将通过JavaScript动态加载 -->
+                                    <div class="loading-state">
+                                        <div class="loading-spinner"></div>
+                                        <p>正在加载Cookie列表...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 模态框：添加/编辑Cookie -->
+    <div class="modal" id="cookieModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitle">添加新Cookie</h3>
+                    <button class="modal-close" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="cookieForm">
+                        <div class="form-group">
+                            <label for="cookieName">
+                                <i class="fas fa-tag"></i>
+                                Cookie名称
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" id="cookieName" name="name" placeholder="为Cookie取一个易于识别的名称" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cookieValue">
+                                <i class="fas fa-key"></i>
+                                Cookie值
+                                <span class="required">*</span>
+                            </label>
+                            <textarea id="cookieValue" name="value" placeholder="粘贴完整的Cookie字符串..." rows="6" required></textarea>
+                            <div class="form-hint">
+                                <i class="fas fa-info-circle"></i>
+                                请粘贴从浏览器复制的完整Cookie字符串
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cookieDescription">
+                                <i class="fas fa-align-left"></i>
+                                描述（可选）
+                            </label>
+                            <textarea id="cookieDescription" name="description" placeholder="添加备注信息，如Cookie来源、用途等..." rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">
+                        <i class="fas fa-times"></i>
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-warning" id="testBtn" style="display: none;">
+                        <i class="fas fa-flask"></i>
+                        测试有效性
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn" form="cookieForm">
+                        <i class="fas fa-save"></i>
+                        保存Cookie
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框：Cookie详情 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Cookie详细信息</h3>
+                    <button class="modal-close" id="closeDetailModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="cookieDetailContent">
+                        <!-- 详情内容将通过JavaScript动态填充 -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeDetailBtn">
+                        <i class="fas fa-times"></i>
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框：二维码获取 -->
+    <div class="modal" id="qrLoginModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-dialog modal-small">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">
+                        <i class="fas fa-qrcode"></i>
+                        二维码获取Cookie
+                    </h3>
+                    <button class="modal-close" id="closeQrLoginModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="qrLoginForm">
+                        <!-- 二维码显示区域 -->
+                        <div id="qrCodeContainer" class="qr-code-container" style="display: none;">
+                            <div class="qr-code-wrapper">
+                                <img id="qrCodeImage" src="" alt="登录二维码" class="qr-code-image">
+                                <div id="qrCodeOverlay" class="qr-code-overlay" style="display: none;">
+                                    <div class="qr-code-status">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>已扫描，请在手机上确认</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="qr-code-tip">
+                                <i class="fas fa-info-circle"></i>
+                                <span>请使用豆包APP或抖音APP扫描二维码登录</span>
+                            </div>
+                            <div class="qr-code-timer">
+                                <i class="fas fa-clock"></i>
+                                <span id="qrCodeTimer">有效期：5分00秒</span>
+                            </div>
+                        </div>
+
+                        <!-- 初始状态提示 -->
+                        <div id="qrCodeInit" class="qr-code-init">
+                            <div class="qr-code-placeholder">
+                                <i class="fas fa-qrcode"></i>
+                                <p>点击"获取二维码"开始登录</p>
+                            </div>
+                        </div>
+
+                        <!-- 加载状态 -->
+                        <div id="qrCodeLoading" class="qr-code-loading" style="display: none;">
+                            <div class="loading-spinner"></div>
+                            <p>正在获取二维码...</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cookieNameQr">
+                                <i class="fas fa-tag"></i>
+                                Cookie名称
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" id="cookieNameQr" name="cookieName" placeholder="为获取的Cookie取一个名称" required>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelQrLoginBtn">
+                        <i class="fas fa-times"></i>
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-success" id="getQrCodeBtn">
+                        <i class="fas fa-qrcode"></i>
+                        获取二维码
+                    </button>
+                    <button type="button" class="btn btn-primary" id="confirmQrLoginBtn" style="display: none;" disabled>
+                        <i class="fas fa-save"></i>
+                        保存Cookie
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框：确认删除 -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-dialog modal-small">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">确认删除</h3>
+                    <button class="modal-close" id="closeConfirmModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="confirm-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p id="confirmMessage">确定要删除这个Cookie吗？</p>
+                        <p class="confirm-warning">此操作不可撤销！</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">
+                        <i class="fas fa-times"></i>
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                        <i class="fas fa-trash"></i>
+                        确认删除
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast通知容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- 引入主题脚本 -->
+    <script src="/js/theme.js"></script>
+    <!-- 引入Cookie管理脚本（ES模块） -->
+    <script type="module" src="/js/cookies.js"></script>
+    <!-- 引入新手引导脚本 -->
+    <script src="/js/onboarding.js"></script>
+</body>
+</html>

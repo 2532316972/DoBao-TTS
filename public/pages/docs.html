@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档中心 - DoBao TTS</title>
+    <!-- 主题预加载脚本 - 防止闪烁 -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (savedTheme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/console.css">
+    <link rel="stylesheet" href="/css/mobile-fix.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入 marked.js 用于 Markdown 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* 文档页面专用样式 - 与其他页面风格统一 */
+        .docs-layout {
+            display: flex;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 左侧导航栏 - 与settings页面风格一致 */
+        .docs-sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar-header {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sidebar-title i {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+
+        .search-box {
+            margin-bottom: 1rem;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.625rem 2.5rem 0.625rem 0.875rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: all var(--transition-fast);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: 0.375rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .search-btn:hover {
+            color: var(--primary-color);
+            background: var(--bg-tertiary);
+        }
+
+        .doc-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: calc(100vh - 300px);
+            overflow-y: auto;
+        }
+
+        .doc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .doc-item:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+        }
+
+        .doc-item.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .doc-item i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            color: var(--text-tertiary);
+            transition: color var(--transition-fast);
+        }
+
+        .doc-item:hover i {
+            color: var(--primary-color);
+        }
+
+        .doc-item.active i {
+            color: white;
+        }
+
+        .doc-item-name {
+            flex: 1;
+            font-size: 0.9375rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-footer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 右侧内容区 - 与settings页面风格一致 */
+        .docs-content {
+            flex: 1;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 140px);
+        }
+
+        .content-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-primary);
+        }
+
+        .content-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .content-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .content-title i {
+            color: var(--primary-color);
+        }
+
+        .content-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .content-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        /* Markdown 内容样式 - 优化版 */
+        .markdown-body {
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 15px;
+            max-width: 800px;
+        }
+
+        .markdown-body h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .markdown-body h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        .markdown-body h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .markdown-body h5,
+        .markdown-body h6 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .markdown-body p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .markdown-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .markdown-body em {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .markdown-body del {
+            text-decoration: line-through;
+            color: var(--text-tertiary);
+        }
+
+        /* 行内代码 */
+        .markdown-body code {
+            background: var(--bg-tertiary);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-family: 'SFMono-Regular', 'Consolas', 'Monaco', monospace;
+            font-size: 0.875em;
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+        }
+
+        /* 代码块 */
+        .markdown-body pre {
+            background: var(--bg-secondary);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .markdown-body pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            border: none;
+        }
+
+        /* 引用块 */
+        .markdown-body blockquote {
+            border-left: 4px solid var(--primary-color);
+            margin: 1.25rem 0;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            font-style: italic;
+        }
+
+        .markdown-body blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 列表样式 - 优化 */
+        .markdown-body ul,
+        .markdown-body ol {
+            margin-top: 0.5rem;
+            margin-bottom: 1.25rem;
+            padding-left: 1.75rem;
+        }
+
+        .markdown-body ul {
+            list-style-type: disc;
+        }
+
+        .markdown-body ol {
+            list-style-type: decimal;
+        }
+
+        .markdown-body ul ul,
+        .markdown-body ol ol,
+        .markdown-body ul ol,
+        .markdown-body ol ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .markdown-body li {
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .markdown-body li > p {
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* 链接 */
+        .markdown-body a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--primary-color);
+            transition: all 0.2s ease;
+        }
+
+        .markdown-body a:hover {
+            border-bottom: 1px solid var(--primary-color);
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        /* 表格 - 优化 */
+        .markdown-body table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.25rem 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            font-size: 0.9375rem;
+        }
+
+        .markdown-body th,
+        .markdown-body td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .markdown-body th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .markdown-body tr:last-child td {
+            border-bottom: none;
+        }
+
+        .markdown-body tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        .markdown-body tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* 分隔线 */
+        .markdown-body hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        /* 图片 */
+        .markdown-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            margin: 1.25rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* 任务列表 */
+        .markdown-body input[type="checkbox"] {
+            margin-right: 0.5rem;
+            cursor: default;
+        }
+
+        /* 空状态 */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+            color: var(--text-tertiary);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* 加载状态 */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+            color: var(--text-tertiary);
+        }
+
+        .loading-state i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 文档信息卡片 */
+        .doc-info-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .doc-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doc-info-item i {
+            color: var(--primary-color);
+        }
+
+        /* 移动端侧边栏折叠 */
+        .docs-sidebar {
+            transition: all 0.3s ease;
+        }
+
+        .docs-sidebar.collapsed {
+            max-height: 60px;
+            overflow: hidden;
+        }
+
+        .docs-sidebar.collapsed .sidebar-toggle i {
+            transform: rotate(-90deg);
+        }
+
+        .sidebar-toggle {
+            display: none;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: 0.375rem;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background: var(--bg-tertiary);
+            color: var(--primary-color);
+        }
+
+        .sidebar-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        /* 移动端菜单遮罩 */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* 移动端适配 - 侧边栏布局 */
+        @media (max-width: 768px) {
+            .docs-layout {
+                flex-direction: column;
+                padding: var(--spacing-sm);
+                gap: var(--spacing-sm);
+            }
+
+            .docs-sidebar {
+                width: 260px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 1000;
+                border-radius: 0;
+                margin: 0;
+                transform: translateX(-100%);
+                max-height: none;
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            .docs-sidebar.mobile-visible {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: static;
+                margin-left: auto;
+            }
+
+            .sidebar-header {
+                padding: 1rem;
+                padding-right: 2rem;
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+            .sidebar-title {
+                font-size: 1rem;
+            }
+
+            .sidebar-title i {
+                font-size: 1.125rem;
+            }
+
+            .search-box {
+                padding: 0 1rem;
+            }
+
+            .doc-list {
+                max-height: none;
+                padding: 0 1rem;
+            }
+
+            .doc-item {
+                padding: 0.75rem 1rem;
+                font-size: 0.9375rem;
+            }
+
+            .sidebar-footer {
+                padding: 1rem;
+            }
+
+            .docs-content {
+                min-height: auto;
+                border-radius: var(--radius-md);
+                flex: 1;
+            }
+
+            .content-header {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .content-title {
+                font-size: 1.125rem;
+            }
+
+            .content-title i {
+                font-size: 1rem;
+            }
+
+            .content-subtitle {
+                font-size: 0.8125rem;
+            }
+
+            .content-body {
+                padding: 1rem;
+                max-height: none;
+            }
+
+            .markdown-body {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .markdown-body h1 {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .markdown-body h2 {
+                font-size: 1.0625rem;
+                margin-top: 1.5rem;
+            }
+
+            .markdown-body h3 {
+                font-size: 0.9375rem;
+                margin-top: 1rem;
+            }
+
+            .markdown-body pre {
+                padding: 0.75rem;
+                font-size: 0.8125rem;
+            }
+
+            .markdown-body table {
+                font-size: 0.8125rem;
+            }
+
+            .markdown-body th,
+            .markdown-body td {
+                padding: 0.5rem 0.625rem;
+            }
+
+            .doc-info-card {
+                flex-direction: column;
+                gap: 0.375rem;
+                padding: 0.75rem;
+                font-size: 0.8125rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* 小屏幕手机适配 */
+        @media (max-width: 480px) {
+            .docs-layout {
+                padding: var(--spacing-xs);
+            }
+
+            .docs-sidebar {
+                width: 240px;
+            }
+
+            .content-header {
+                padding: 0.875rem;
+            }
+
+            .content-body {
+                padding: 0.875rem;
+            }
+
+            .markdown-body {
+                font-size: 13px;
+            }
+
+            .markdown-body h1 {
+                font-size: 1.125rem;
+            }
+
+            .markdown-body h2 {
+                font-size: 1rem;
+            }
+
+            .markdown-body ul,
+            .markdown-body ol {
+                padding-left: 1.25rem;
+            }
+        }
+
+        /* 滚动条样式 */
+        .doc-list::-webkit-scrollbar,
+        .content-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .doc-list::-webkit-scrollbar-track,
+        .content-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .doc-list::-webkit-scrollbar-thumb,
+        .content-body::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .doc-list::-webkit-scrollbar-thumb:hover,
+        .content-body::-webkit-scrollbar-thumb:hover {
+            background: var(--text-tertiary);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="app-title">
+                        <i class="fas fa-book app-icon"></i>
+                        <span>文档中心</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="header-btn" title="返回首页">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 应用主体 -->
+        <div class="app-body">
+            <!-- 主内容区域 -->
+            <main class="main-content">
+                <!-- 文档内容 -->
+                <div class="content-section active">
+                    <div class="section-header">
+                        <div class="section-title-group">
+                            <h1 class="section-title">文档中心</h1>
+                            <p class="section-description">查看项目文档和使用说明</p>
+                        </div>
+                    </div>
+                    <div class="docs-layout">
+                        <!-- 移动端遮罩 -->
+                        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+                        <!-- 左侧边栏 -->
+                        <aside class="docs-sidebar" id="docsSidebar">
+                            <div class="sidebar-header">
+                                <div class="sidebar-title">
+                                    <i class="fas fa-folder-open"></i>
+                                    <span>文档列表</span>
+                                </div>
+                                <button class="sidebar-toggle" id="sidebarToggle" title="展开/收起">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+
+                            <div class="search-box">
+                                <div class="search-input-wrapper">
+                                    <input type="text" class="search-input" id="searchInput" placeholder="搜索文档...">
+                                    <button class="search-btn" id="searchBtn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <ul class="doc-list" id="docList">
+                                <li class="loading-state">
+                                    <i class="fas fa-spinner"></i>
+                                    <span>加载文档列表...</span>
+                                </li>
+                            </ul>
+
+                            <div class="sidebar-footer">
+                                <button class="btn btn-primary" id="refreshBtn" style="width: 100%;">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>刷新列表</span>
+                                </button>
+                            </div>
+                        </aside>
+
+                        <!-- 右侧内容区 -->
+                        <section class="docs-content">
+                            <div class="content-header">
+                                <div class="content-title-group">
+                                    <h1 class="content-title">
+                                        <i class="fas fa-file-alt"></i>
+                                        <span id="contentTitle">欢迎使用文档中心</span>
+                                    </h1>
+                                    <span class="content-subtitle" id="contentSubtitle">选择左侧文档开始阅读</span>
+                                </div>
+                            </div>
+
+                            <div class="content-body" id="contentBody">
+                                <div class="empty-state">
+                                    <i class="fas fa-book-open"></i>
+                                    <h3>请从左侧选择文档</h3>
+                                    <p>点击左侧文档列表中的项目来查看内容</p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- 引入主题脚本 -->
+    <script src="/js/theme.js"></script>
+
+    <!-- 文档管理脚本 -->
+    <script>
+        /**
+         * 文档管理器 - 从后端 API 读取云端文档
+         */
+        const DocsManager = {
+            // 文档列表
+            docs: [],
+
+            // 当前选中的文档ID
+            currentDocId: null,
+
+            // 缓存的文档内容
+            docCache: new Map(),
+
+            /**
+             * 初始化文档管理器
+             */
+            async init() {
+                this.bindEvents();
+                await this.loadDocList();
+            },
+
+            /**
+             * 绑定事件
+             */
+            bindEvents() {
+                // 搜索功能
+                const searchInput = document.getElementById('searchInput');
+                const searchBtn = document.getElementById('searchBtn');
+
+                searchInput?.addEventListener('input', (e) => {
+                    this.handleSearch(e.target.value);
+                });
+
+                searchBtn?.addEventListener('click', () => {
+                    this.handleSearch(searchInput.value);
+                });
+
+                // 刷新按钮
+                document.getElementById('refreshBtn')?.addEventListener('click', () => {
+                    this.refreshDocList();
+                });
+
+                // 移动端菜单按钮
+                document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+                    const sidebar = document.getElementById('docsSidebar');
+                    const overlay = document.getElementById('sidebarOverlay');
+                    sidebar.classList.toggle('mobile-visible');
+                    overlay.classList.toggle('active');
+                });
+
+                // 遮罩点击关闭侧边栏
+                document.getElementById('sidebarOverlay')?.addEventListener('click', () => {
+                    const sidebar = document.getElementById('docsSidebar');
+                    const overlay = document.getElementById('sidebarOverlay');
+                    sidebar.classList.remove('mobile-visible');
+                    overlay.classList.remove('active');
+                });
+
+                // 侧边栏折叠按钮（仅桌面端）
+                document.getElementById('sidebarToggle')?.addEventListener('click', () => {
+                    const sidebar = document.getElementById('docsSidebar');
+                    // 仅在桌面端折叠
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.toggle('collapsed');
+                    }
+                });
+            },
+
+            /**
+             * 从后端 API 获取文档列表
+             */
+            async loadDocList() {
+                const docListEl = document.getElementById('docList');
+
+                try {
+                    docListEl.innerHTML = `
+                        <li class="loading-state">
+                            <i class="fas fa-spinner"></i>
+                            <span>加载文档列表...</span>
+                        </li>
+                    `;
+
+                    // 从后端 API 获取文档列表
+                    const response = await fetch('/api/docs');
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.code !== 0) {
+                        throw new Error(result.msg || '获取文档列表失败');
+                    }
+
+                    this.docs = result.data || [];
+                    this.renderDocList(this.docs);
+                } catch (error) {
+                    console.error('加载文档列表失败:', error);
+                    docListEl.innerHTML = `
+                        <li class="empty-state">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h3>加载失败</h3>
+                            <p>${error.message}</p>
+                        </li>
+                    `;
+                }
+            },
+
+            /**
+             * 渲染文档列表
+             */
+            renderDocList(docs) {
+                const docListEl = document.getElementById('docList');
+
+                if (docs.length === 0) {
+                    docListEl.innerHTML = `
+                        <li class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h3>暂无文档</h3>
+                            <p>云端仓库中没有文档文件</p>
+                        </li>
+                    `;
+                    return;
+                }
+
+                docListEl.innerHTML = docs.map(doc => `
+                    <li class="doc-item ${doc.id === this.currentDocId ? 'active' : ''}" data-id="${doc.id}">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="doc-item-name">${this.escapeHtml(doc.name)}</span>
+                    </li>
+                `).join('');
+
+                // 绑定点击事件
+                docListEl.querySelectorAll('.doc-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const docId = item.dataset.id;
+                        this.loadDocContent(docId);
+                        // 移动端点击后关闭侧边栏
+                        if (window.innerWidth <= 768) {
+                            const sidebar = document.getElementById('docsSidebar');
+                            const overlay = document.getElementById('sidebarOverlay');
+                            sidebar.classList.remove('mobile-visible');
+                            overlay.classList.remove('active');
+                        }
+                    });
+                });
+            },
+
+            /**
+             * 加载文档内容
+             */
+            async loadDocContent(docId) {
+                // 更新选中状态
+                this.currentDocId = docId;
+                document.querySelectorAll('.doc-item').forEach(item => {
+                    item.classList.toggle('active', item.dataset.id === docId);
+                });
+
+                const contentBody = document.getElementById('contentBody');
+                const contentTitle = document.getElementById('contentTitle');
+                const contentSubtitle = document.getElementById('contentSubtitle');
+
+                // 检查缓存
+                if (this.docCache.has(docId)) {
+                    this.renderDocContent(this.docCache.get(docId));
+                    return;
+                }
+
+                // 显示加载状态
+                contentBody.innerHTML = `
+                    <div class="loading-state">
+                        <i class="fas fa-spinner"></i>
+                        <span>加载文档内容...</span>
+                    </div>
+                `;
+
+                try {
+                    // 从后端 API 获取文档内容
+                    const response = await fetch(`/api/docs/${docId}`);
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.code !== 0) {
+                        throw new Error(result.msg || '获取文档内容失败');
+                    }
+
+                    const doc = result.data;
+
+                    // 缓存文档内容
+                    this.docCache.set(docId, doc);
+                    this.renderDocContent(doc);
+                } catch (error) {
+                    console.error('加载文档内容失败:', error);
+                    contentBody.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h3>加载失败</h3>
+                            <p>${error.message}</p>
+                        </div>
+                    `;
+                    contentTitle.textContent = '加载失败';
+                    contentSubtitle.textContent = '';
+                }
+            },
+
+            /**
+             * 渲染文档内容
+             */
+            renderDocContent(doc) {
+                const contentBody = document.getElementById('contentBody');
+                const contentTitle = document.getElementById('contentTitle');
+                const contentSubtitle = document.getElementById('contentSubtitle');
+
+                contentTitle.textContent = doc.name;
+                contentSubtitle.textContent = doc.filename;
+
+                // 格式化文件大小
+                const sizeStr = this.formatFileSize(doc.size);
+
+                // 使用 marked.js 解析 Markdown
+                const htmlContent = marked.parse(doc.content);
+
+                contentBody.innerHTML = `
+                    <div class="markdown-body">
+                        <div class="doc-info-card">
+                            <div class="doc-info-item">
+                                <i class="fas fa-file"></i>
+                                <span>${doc.filename}</span>
+                            </div>
+                            <div class="doc-info-item">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>${sizeStr}</span>
+                            </div>
+                        </div>
+                        ${htmlContent}
+                    </div>
+                `;
+            },
+
+            /**
+             * 处理搜索
+             */
+            handleSearch(keyword) {
+                if (!keyword.trim()) {
+                    this.renderDocList(this.docs);
+                    return;
+                }
+
+                const lowerKeyword = keyword.toLowerCase();
+                const filtered = this.docs.filter(doc =>
+                    doc.name.toLowerCase().includes(lowerKeyword)
+                );
+
+                this.renderDocList(filtered);
+            },
+
+            /**
+             * 刷新文档列表
+             */
+            async refreshDocList() {
+                const refreshBtn = document.getElementById('refreshBtn');
+                const icon = refreshBtn.querySelector('i');
+
+                icon.classList.add('fa-spin');
+                refreshBtn.disabled = true;
+
+                // 清除缓存
+                this.docCache.clear();
+
+                await this.loadDocList();
+
+                icon.classList.remove('fa-spin');
+                refreshBtn.disabled = false;
+            },
+
+            /**
+             * 格式化文件大小
+             */
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 B';
+                const k = 1024;
+                const sizes = ['B', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            },
+
+            /**
+             * HTML 转义
+             */
+            escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        };
+
+        // DOM 加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            DocsManager.init();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统设置 - DoBao TTS</title>
+    <!-- 主题预加载脚本 - 防止闪烁 -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else if (savedTheme === 'system') {
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/css/console.css">
+    <link rel="stylesheet" href="/css/mobile-fix.css">
+    <link rel="stylesheet" href="/css/onboarding.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 系统设置页面专用样式 */
+        .settings-layout {
+            display: flex;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 左侧导航栏 */
+        .settings-sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 80px;
+            border: 1px solid var(--border-color);
+        }
+
+        .settings-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .settings-nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .settings-nav-link:hover {
+            background: var(--bg-secondary);
+            color: var(--primary-color);
+        }
+
+        .settings-nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .settings-nav-link i {
+            font-size: 1.125rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* 右侧内容区 */
+        .settings-content {
+            flex: 1;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .settings-section {
+            margin-bottom: 2rem;
+        }
+
+        .settings-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .settings-section-title i {
+            color: var(--primary-color);
+        }
+
+        /* 设置项样式 */
+        .settings-group {
+            margin-bottom: 2rem;
+        }
+
+        .settings-group-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item-label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .settings-item-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .settings-item-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* 开发者社交链接样式 */
+        .developer-item {
+            align-items: center;
+        }
+
+        .developer-links {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .social-link i {
+            font-size: 1rem;
+        }
+
+        /* 酷安链接样式 - 品牌绿色 */
+        .coolapk-link {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .coolapk-link:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        /* QQ链接样式 - 品牌蓝色 */
+        .qq-link {
+            background: linear-gradient(135deg, #12B7F5 0%, #0ea5e0 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(18, 183, 245, 0.3);
+        }
+
+        .qq-link:hover {
+            background: linear-gradient(135deg, #0ea5e0 0%, #0d94c8 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(18, 183, 245, 0.4);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 640px) {
+            .developer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .social-link {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* 统计信息样式 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* 开关样式 */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-dark);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--primary-color);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* 主题选项样式 */
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .theme-option {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--border-color);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .theme-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .theme-option.active {
+            border-color: var(--primary-color);
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        .theme-option-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .theme-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            background: var(--bg-primary);
+            color: var(--primary-color);
+        }
+
+        .theme-option-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .theme-option-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 0.625rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--error-color) 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-1px);
+        }
+
+        /* 按钮组样式 */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .settings-layout {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .settings-sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .theme-options {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* 存储管理移动端适配 */
+        }
+
+        @media (max-width: 480px) {
+            .settings-content {
+                padding: 1.5rem;
+            }
+
+            .settings-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== 预制任务管理样式 ==================== */
+        .ptm-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .ptm-desc {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin: 0 0 1rem 0;
+            line-height: 1.5;
+        }
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.8125rem;
+        }
+
+        .ptm-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ptm-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .ptm-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 12px rgba(74, 107, 255, 0.08);
+        }
+
+        .ptm-card-main {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+        }
+
+        .ptm-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.12) 0%, rgba(74, 107, 255, 0.04) 100%);
+            color: var(--primary-color);
+        }
+
+        .ptm-card-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ptm-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ptm-card-name {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ptm-card-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            flex-shrink: 0;
+        }
+
+        .ptm-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.1875rem 0.5rem;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.6875rem;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+
+        .ptm-badge--running {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .ptm-badge--paused {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .ptm-badge--pending {
+            background: rgba(107, 114, 128, 0.1);
+            color: #6b7280;
+        }
+
+        .ptm-badge--completed {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .ptm-badge--scheduled {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+        }
+
+        .ptm-card-progress {
+            margin-bottom: 0.375rem;
+        }
+
+        .ptm-progress-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .ptm-progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.4s ease;
+            background: var(--primary-gradient);
+        }
+
+        .ptm-progress-fill--done {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .ptm-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .ptm-card-meta i {
+            font-size: 0.6875rem;
+            margin-right: 0.1875rem;
+        }
+
+        .ptm-card-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            flex-shrink: 0;
+        }
+
+        .ptm-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 0.8125rem;
+        }
+
+        .ptm-action-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        .ptm-action-btn--schedule {
+            color: #8b5cf6;
+            border-color: rgba(139, 92, 246, 0.25);
+        }
+
+        .ptm-action-btn--schedule:hover {
+            background: rgba(139, 92, 246, 0.08);
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+
+        .ptm-action-btn--toggle {
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.25);
+        }
+
+        .ptm-action-btn--toggle:hover {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .ptm-action-btn--pause {
+            color: #f59e0b;
+            border-color: rgba(245, 158, 11, 0.25);
+        }
+
+        .ptm-action-btn--pause:hover {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+
+        .ptm-action-btn--delete {
+            color: var(--error-color);
+            border-color: rgba(239, 68, 68, 0.15);
+        }
+
+        .ptm-action-btn--delete:hover {
+            background: rgba(239, 68, 68, 0.08);
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        .ptm-action-btn--edit {
+            color: #3b82f6;
+            border-color: rgba(59, 130, 246, 0.25);
+        }
+
+        .ptm-action-btn--edit:hover {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .ptm-card-schedule {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.625rem 1.25rem;
+            background: rgba(139, 92, 246, 0.04);
+            border-top: 1px dashed rgba(139, 92, 246, 0.15);
+            font-size: 0.8125rem;
+        }
+
+        .ptm-schedule-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #8b5cf6;
+        }
+
+        .ptm-schedule-info i {
+            font-size: 0.75rem;
+        }
+
+        .ptm-schedule-detail {
+            color: var(--text-secondary);
+        }
+
+        .ptm-schedule-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .ptm-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .ptm-empty-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .ptm-empty-icon i {
+            font-size: 1.5rem;
+            color: var(--text-tertiary);
+        }
+
+        .ptm-empty-title {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin: 0 0 0.25rem 0;
+        }
+
+        .ptm-empty-desc {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+            margin: 0;
+        }
+
+        /* ==================== 定时预制弹窗样式 ==================== */
+        .ptm-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .ptm-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ptm-modal {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 420px;
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.25s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .ptm-modal-overlay.active .ptm-modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .ptm-modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ptm-modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin: 0;
+        }
+
+        .ptm-modal-title i {
+            color: #8b5cf6;
+        }
+
+        .ptm-modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            cursor: pointer;
+            padding: 0.375rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .ptm-modal-close:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .ptm-modal-body {
+            padding: 1.5rem;
+        }
+
+        .ptm-modal-book-info {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .ptm-modal-book-info i {
+            color: var(--primary-color);
+        }
+
+        .ptm-form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .ptm-form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .ptm-form-label {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .ptm-form-label i {
+            color: var(--primary-color);
+            font-size: 0.8125rem;
+        }
+
+        .ptm-form-input-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ptm-form-input {
+            flex: 1;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+        }
+
+        .ptm-form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.1);
+        }
+
+        .ptm-form-suffix {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .ptm-form-hint {
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            margin: 0.375rem 0 0 0;
+            line-height: 1.4;
+        }
+
+        .ptm-form-static {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.625rem 0.875rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .ptm-form-static i {
+            color: #10b981;
+            font-size: 0.875rem;
+        }
+
+        .ptm-time-picker {
+            display: flex;
+            align-items: stretch;
+            gap: 0.5rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .ptm-time-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .ptm-time-label {
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ptm-time-separator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-tertiary);
+            padding-top: 1rem;
+        }
+
+        .ptm-time-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.25rem;
+            max-height: 160px;
+            overflow-y: auto;
+            padding: 0.25rem;
+        }
+
+        .ptm-time-options::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .ptm-time-options::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .ptm-time-options::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        .ptm-time-option {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.375rem 0;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .ptm-time-option:hover {
+            background: rgba(74, 107, 255, 0.08);
+            color: var(--primary-color);
+        }
+
+        .ptm-time-option.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 2px 6px rgba(74, 107, 255, 0.3);
+        }
+
+        .ptm-modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.625rem;
+        }
+
+        @media (max-width: 480px) {
+            .ptm-card-main {
+                flex-wrap: wrap;
+                padding: 0.875rem 1rem;
+            }
+
+            .ptm-card-actions {
+                width: 100%;
+                justify-content: flex-end;
+                padding-top: 0.5rem;
+                border-top: 1px solid var(--border-light);
+                margin-top: 0.25rem;
+            }
+
+            .ptm-card-schedule {
+                flex-wrap: wrap;
+                padding: 0.625rem 1rem;
+            }
+
+            .ptm-schedule-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .ptm-modal {
+                width: 95%;
+            }
+
+            .ptm-modal-body {
+                padding: 1.25rem;
+            }
+        }
+
+        /* 更新弹窗样式 */
+        .update-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .update-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .update-modal {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .update-modal-overlay.active .update-modal {
+            transform: scale(1);
+        }
+
+        .update-modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .update-modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .update-modal-title i {
+            color: var(--primary-color);
+        }
+
+        .update-modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+
+        .update-modal-close:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .update-modal-body {
+            padding: 1.5rem;
+        }
+
+        .update-dropzone {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            background: var(--bg-secondary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .update-dropzone:hover {
+            border-color: var(--primary-color);
+            background: rgba(74, 107, 255, 0.05);
+        }
+
+        .update-dropzone.dragover {
+            border-color: var(--primary-color);
+            background: rgba(74, 107, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .update-dropzone-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .update-dropzone-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .update-dropzone-hint {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .update-file-input {
+            display: none;
+        }
+
+        .update-file-info {
+            display: none;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .update-file-info.show {
+            display: block;
+        }
+
+        .update-file-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .update-file-size {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .update-progress {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .update-progress.show {
+            display: block;
+        }
+
+        .update-progress-bar {
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .update-progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .update-progress-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .update-modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        .update-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .update-warning i {
+            color: #f59e0b;
+            font-size: 1.25rem;
+            margin-top: 0.125rem;
+        }
+
+        .update-warning-text {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .update-status {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .update-status.show {
+            display: block;
+        }
+
+        .update-status.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .update-status.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .update-status.info {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
+        }
+
+        /* 移动端更新弹窗优化 */
+        @media (max-width: 768px) {
+            .update-modal {
+                width: 95%;
+                max-height: 85vh;
+                margin: 1rem;
+            }
+
+            .update-modal-header {
+                padding: 1rem;
+            }
+
+            .update-modal-title {
+                font-size: 1.125rem;
+            }
+
+            .update-modal-body {
+                padding: 1rem;
+            }
+
+            .update-dropzone {
+                padding: 1.5rem 1rem;
+            }
+
+            .update-dropzone-icon {
+                font-size: 2.5rem;
+            }
+
+            .update-dropzone-text {
+                font-size: 0.9375rem;
+            }
+
+            .update-modal-footer {
+                padding: 1rem;
+                flex-direction: column-reverse;
+            }
+
+            .update-modal-footer .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .update-warning {
+                padding: 0.875rem;
+            }
+
+            .update-warning-text {
+                font-size: 0.8125rem;
+            }
+        }
+
+        /* 触摸设备优化 */
+        @media (pointer: coarse) {
+            .update-dropzone {
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .update-dropzone:active {
+                transform: scale(0.98);
+                background: rgba(74, 107, 255, 0.1);
+            }
+
+            /* 隐藏拖放提示在纯触摸设备上 */
+            .update-dropzone-hint {
+                display: none;
+            }
+
+            .touch-hint {
+                display: block;
+                font-size: 0.875rem;
+                color: var(--text-secondary);
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (pointer: fine) {
+            .touch-hint {
+                display: none;
+            }
+        }
+
+        /* 文件输入框在移动端的优化 */
+        .update-file-input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Android WebView 特殊处理 */
+        @supports (-webkit-touch-callout: none) {
+            .update-dropzone {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+
+        /* ==================== 数据导出页面新样式 ==================== */
+
+        /* 数据概览卡片 */
+        .data-overview-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-card {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .overview-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .overview-card-icon.cookie {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%);
+            color: #f59e0b;
+        }
+
+        .overview-card-icon.task {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%);
+            color: #3b82f6;
+        }
+
+        .overview-card-icon.book {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+            color: #10b981;
+        }
+
+        .overview-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+
+        .overview-card-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .overview-card-label {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        /* 导出/导入区域卡片 */
+        .export-section,
+        .import-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .section-card-header i {
+            color: var(--primary-color);
+            font-size: 1.125rem;
+        }
+
+        /* 警告提示 */
+        .export-warning,
+        .import-warning {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 0.875rem;
+            border-radius: var(--radius-md);
+            font-size: 0.8125rem;
+            margin-bottom: 1rem;
+        }
+
+        .export-warning {
+            background: rgba(245, 158, 11, 0.08);
+            color: #d97706;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .import-warning {
+            background: rgba(239, 68, 68, 0.08);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .export-warning i,
+        .import-warning i {
+            font-size: 0.875rem;
+        }
+
+        /* 导出选项 */
+        .export-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .export-option-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 1rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .export-option-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .export-option-item.sub-item {
+            margin-left: 1.5rem;
+            background: transparent;
+            border-style: dashed;
+        }
+
+        .export-option-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .export-option-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .export-option-title i {
+            color: var(--primary-color);
+            font-size: 0.875rem;
+        }
+
+        .export-option-desc {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .export-sub-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        /* 进度条 */
+        .export-progress-container,
+        .import-progress-container {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .progress-header span:first-child {
+            color: var(--text-secondary);
+        }
+
+        .progress-header span:last-child {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* 操作按钮 */
+        .export-actions,
+        .import-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* 导入策略 */
+        .import-strategy {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .import-strategy-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-select {
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+        }
+
+        /* 文件上传区域 */
+        .import-file-upload {
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 2rem;
+            background: var(--bg-primary);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .file-upload-zone:hover {
+            border-color: var(--primary-color);
+            background: rgba(74, 107, 255, 0.02);
+        }
+
+        .file-upload-zone i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .file-upload-text {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .file-upload-hint {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .selected-file {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding: 0.625rem 0.875rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .selected-file i {
+            color: var(--primary-color);
+        }
+
+        .selected-file.has-file {
+            color: var(--text-primary);
+            background: rgba(74, 107, 255, 0.08);
+        }
+
+        /* 导入结果 */
+        .import-result {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .data-overview-cards {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+            }
+
+            .overview-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem 0.5rem;
+                gap: 0.5rem;
+            }
+
+            .overview-card-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .overview-card-value {
+                font-size: 1.25rem;
+            }
+
+            .overview-card-label {
+                font-size: 0.75rem;
+            }
+
+            .export-option-item {
+                padding: 0.75rem;
+            }
+
+            .export-option-item.sub-item {
+                margin-left: 1rem;
+            }
+
+            .export-option-title {
+                font-size: 0.875rem;
+            }
+
+            .export-option-desc {
+                font-size: 0.75rem;
+            }
+
+            .import-strategy {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .file-upload-zone {
+                padding: 1.5rem 1rem;
+            }
+
+            .export-actions,
+            .import-actions {
+                flex-direction: column;
+            }
+
+            .export-actions .btn,
+            .import-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .data-overview-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .export-section,
+            .import-section {
+                padding: 1rem;
+            }
+        }
+
+        /* ==================== 服务器设置页面样式 ==================== */
+
+        /* 服务器状态卡片 */
+        .server-status-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-card {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .status-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .status-card-icon.online {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+            color: #10b981;
+        }
+
+        .status-card-icon.config {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%);
+            color: #3b82f6;
+        }
+
+        .status-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .status-card-label {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .status-card-value {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            word-break: break-all;
+            line-height: 1.3;
+        }
+
+        /* 服务器配置区域 */
+        .server-config-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 1.25rem;
+        }
+
+        .server-config-warning {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 0.875rem;
+            border-radius: var(--radius-md);
+            font-size: 0.8125rem;
+            margin-bottom: 1rem;
+            background: rgba(245, 158, 11, 0.08);
+            color: #d97706;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .server-config-warning i {
+            font-size: 0.875rem;
+        }
+
+        /* 端口配置 */
+        .server-port-config {
+            margin-bottom: 1.25rem;
+        }
+
+        .port-input-group {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .port-input-label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .port-label-title {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .port-label-desc {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .port-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .port-input {
+            width: 90px;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .port-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.1);
+        }
+
+        .port-input-suffix {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* 服务器操作按钮 */
+        .server-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .server-status-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .status-card {
+                padding: 0.875rem 1rem;
+            }
+
+            .status-card-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.125rem;
+            }
+
+            .port-input-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .port-input-wrapper {
+                width: 100%;
+            }
+
+            .port-input {
+                flex: 1;
+            }
+
+            .server-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .server-config-section {
+                padding: 1rem;
+            }
+
+            .port-input-group {
+                padding: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="app-title">
+                        <i class="fas fa-cog app-icon"></i>
+                        <span>系统设置</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="header-btn" title="返回总览">
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 应用主体 -->
+        <div class="app-body">
+            <!-- 主内容区域 -->
+            <main class="main-content">
+                <!-- 设置内容 -->
+                <div class="content-section active" id="settings-section">
+                    <div class="section-header">
+                        <div class="section-title-group">
+                            <h1 class="section-title">系统设置</h1>
+                            <p class="section-description">DoBao TTS代理服务的系统配置管理</p>
+                        </div>
+                    </div>
+
+                    <div class="settings-layout">
+                        <!-- 左侧导航栏 -->
+                        <aside class="settings-sidebar">
+                            <ul class="settings-nav">
+                                <li class="settings-nav-item">
+                                    <a href="#prefab-book" class="settings-nav-link active">
+                                        <i class="fas fa-book"></i>
+                                        <span>预制书</span>
+                                    </a>
+                                </li>
+                                <li class="settings-nav-item">
+                                    <a href="#theme" class="settings-nav-link">
+                                        <i class="fas fa-palette"></i>
+                                        <span>主题设置</span>
+                                    </a>
+                                </li>
+                                <li class="settings-nav-item">
+                                    <a href="#data-import" class="settings-nav-link">
+                                        <i class="fas fa-file-import"></i>
+                                        <span>数据导入</span>
+                                    </a>
+                                </li>
+                                <li class="settings-nav-item">
+                                    <a href="#data-export" class="settings-nav-link">
+                                        <i class="fas fa-file-export"></i>
+                                        <span>数据导出</span>
+                                    </a>
+                                </li>
+                                <li class="settings-nav-item">
+                                    <a href="#server" class="settings-nav-link">
+                                        <i class="fas fa-server"></i>
+                                        <span>服务器设置</span>
+                                    </a>
+                                </li>
+                                <li class="settings-nav-item">
+                                    <a href="#about" class="settings-nav-link">
+                                        <i class="fas fa-info-circle"></i>
+                                        <span>关于</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+
+                        <!-- 右侧内容区 -->
+                        <div class="settings-content">
+                            <!-- 预制书设置 -->
+                            <section id="prefab-book" class="settings-section">
+                                <h2 class="settings-section-title">
+                                    <i class="fas fa-book"></i>
+                                    预制书设置
+                                </h2>
+
+                                <div class="settings-group">
+                                    <h3 class="settings-group-title">缓存设置</h3>
+
+                                    <div class="settings-item">
+                                        <div class="settings-item-label">
+                                            <span class="settings-item-name">缓存并发数</span>
+                                            <span class="settings-item-desc">书籍缓存时同时处理的章节数，1-100，数值越高速度越快但可能增加服务器压力</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <input type="number" id="cacheConcurrentInput" class="form-input" value="20" min="1" max="100" style="width: 80px; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-primary); color: var(--text-primary); text-align: center;">
+                                            <span style="color: var(--text-secondary); font-size: 0.875rem;">章</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group" style="margin-top: 2rem;">
+                                    <div class="ptm-header">
+                                        <h3 class="settings-group-title" style="margin-bottom: 0; border-bottom: none; padding-bottom: 0;">
+                                            <i class="fas fa-tasks"></i>
+                                            预制任务管理
+                                        </h3>
+                                        <button class="btn btn-secondary btn-sm" id="refreshTaskListBtn" title="刷新列表">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </div>
+                                    <p class="ptm-desc">管理预制书模式中创建的任务，支持对未完成任务设置定时间隔预制</p>
+
+                                    <div id="prefetchTaskList" class="ptm-list">
+                                    </div>
+
+                                    <div id="prefetchTaskEmpty" class="ptm-empty" style="display: none;">
+                                        <div class="ptm-empty-icon">
+                                            <i class="fas fa-inbox"></i>
+                                        </div>
+                                        <p class="ptm-empty-title">暂无预制任务</p>
+                                        <p class="ptm-empty-desc">在预制书模式中创建预制任务后，可在此管理</p>
+                                    </div>
+                                </div>
+
+                            </section>
+
+                            <!-- 主题设置 -->
+                            <section id="theme" class="settings-section" style="display: none;">
+                                <h2 class="settings-section-title">
+                                    <i class="fas fa-palette"></i>
+                                    主题设置
+                                </h2>
+
+                                <div class="settings-group">
+                                    <h3 class="settings-group-title">主题选择</h3>
+                                    
+                                    <!-- 主题选项 -->
+                                    <div class="theme-options">
+                                        <!-- 浅色主题 -->
+                                        <div class="theme-option active" data-theme="light">
+                                            <div class="theme-option-header">
+                                                <div class="theme-option-icon">
+                                                    <i class="fas fa-sun"></i>
+                                                </div>
+                                                <h3 class="theme-option-title">浅色主题</h3>
+                                            </div>
+                                            <p class="theme-option-description">明亮清新的界面风格，适合白天使用</p>
+                                        </div>
+
+                                        <!-- 深色主题 -->
+                                        <div class="theme-option" data-theme="dark">
+                                            <div class="theme-option-header">
+                                                <div class="theme-option-icon">
+                                                    <i class="fas fa-moon"></i>
+                                                </div>
+                                                <h3 class="theme-option-title">深色主题</h3>
+                                            </div>
+                                            <p class="theme-option-description">深色沉稳的界面风格，适合夜间使用</p>
+                                        </div>
+
+                                        <!-- 跟随系统 -->
+                                        <div class="theme-option" data-theme="system">
+                                            <div class="theme-option-header">
+                                                <div class="theme-option-icon">
+                                                    <i class="fas fa-desktop"></i>
+                                                </div>
+                                                <h3 class="theme-option-title">跟随系统</h3>
+                                            </div>
+                                            <p class="theme-option-description">根据系统设置自动切换主题</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- 数据导入 -->
+                            <section id="data-import" class="settings-section" style="display: none;">
+                                <h2 class="settings-section-title">
+                                    <i class="fas fa-file-import"></i>
+                                    数据导入
+                                </h2>
+
+                                <!-- 导入区域 -->
+                                <div class="import-section">
+                                    <div class="section-card-header">
+                                        <i class="fas fa-upload"></i>
+                                        <span>导入数据</span>
+                                    </div>
+
+                                    <div class="import-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <span>覆盖导入操作会覆盖现有数据，请谨慎操作</span>
+                                    </div>
+
+                                    <!-- 合并策略 -->
+                                    <div class="import-strategy">
+                                        <span class="import-strategy-label">合并策略</span>
+                                        <select id="importMergeStrategy" class="form-select">
+                                            <option value="merge">合并（保留现有）</option>
+                                            <option value="replace">替换（覆盖现有）</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- 文件上传 -->
+                                    <div class="import-file-upload">
+                                        <input type="file" id="importFileInput" accept=".zip" style="display: none;">
+                                        <div class="file-upload-zone" id="selectImportFileBtn">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span class="file-upload-text">点击选择 .zip 文件</span>
+                                            <span class="file-upload-hint">或拖放文件到此处</span>
+                                        </div>
+                                        <div class="selected-file" id="selectedImportFileName">
+                                            <i class="fas fa-file-archive"></i>
+                                            <span>未选择文件</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 导入进度 -->
+                                    <div class="import-progress-container" id="importProgressGroup" style="display: none;">
+                                        <div class="progress-header">
+                                            <span id="importProgressText">准备导入...</span>
+                                            <span id="importProgressPercent">0%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div id="importProgressBar" class="progress-fill"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 导入结果 -->
+                                    <div class="import-result" id="importResultGroup" style="display: none;">
+                                        <div id="importResultContent"></div>
+                                    </div>
+
+                                    <!-- 导入按钮 -->
+                                    <div class="import-actions">
+                                        <button class="btn btn-primary" id="importDataBtn" disabled>
+                                            <i class="fas fa-upload"></i>
+                                            开始导入
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- 数据导出 -->
+                            <section id="data-export" class="settings-section" style="display: none;">
+                                <h2 class="settings-section-title">
+                                    <i class="fas fa-file-export"></i>
+                                    数据导出
+                                </h2>
+
+                                <!-- 数据概览卡片 -->
+                                <div class="data-overview-cards">
+                                    <div class="overview-card">
+                                        <div class="overview-card-icon cookie">
+                                            <i class="fas fa-cookie-bite"></i>
+                                        </div>
+                                        <div class="overview-card-content">
+                                            <div class="overview-card-value" id="exportCookieCount">0</div>
+                                            <div class="overview-card-label">Cookie</div>
+                                        </div>
+                                    </div>
+                                    <div class="overview-card">
+                                        <div class="overview-card-icon task">
+                                            <i class="fas fa-tasks"></i>
+                                        </div>
+                                        <div class="overview-card-content">
+                                            <div class="overview-card-value" id="exportTaskCount">0</div>
+                                            <div class="overview-card-label">预制任务</div>
+                                        </div>
+                                    </div>
+                                    <div class="overview-card">
+                                        <div class="overview-card-icon book">
+                                            <i class="fas fa-book"></i>
+                                        </div>
+                                        <div class="overview-card-content">
+                                            <div class="overview-card-value" id="exportBookCount">0</div>
+                                            <div class="overview-card-label">缓存书籍</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 导出区域 -->
+                                <div class="export-section">
+                                    <div class="section-card-header">
+                                        <i class="fas fa-download"></i>
+                                        <span>导出数据</span>
+                                    </div>
+
+                                    <div class="export-warning">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>导出的Cookie数据包含敏感信息，请妥善保管</span>
+                                    </div>
+
+                                    <!-- 导出选项 -->
+                                    <div class="export-options">
+                                        <label class="export-option-item">
+                                            <div class="export-option-info">
+                                                <div class="export-option-title">
+                                                    <i class="fas fa-cookie"></i>
+                                                    Cookie数据
+                                                </div>
+                                                <div class="export-option-desc">导出所有已配置的Cookie信息</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="exportCookies" checked>
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </label>
+
+                                        <label class="export-option-item">
+                                            <div class="export-option-info">
+                                                <div class="export-option-title">
+                                                    <i class="fas fa-book-reader"></i>
+                                                    预制书数据
+                                                </div>
+                                                <div class="export-option-desc">导出预制书任务、书籍缓存和已完成的音频内容</div>
+                                            </div>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="exportPrefetchData">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </label>
+
+                                        <!-- 子选项 -->
+                                        <div id="prefetchSubOptions" class="export-sub-options" style="display: none;">
+                                            <label class="export-option-item sub-item">
+                                                <div class="export-option-info">
+                                                    <div class="export-option-title">预制书任务状态</div>
+                                                    <div class="export-option-desc">导出所有预制书任务的状态信息</div>
+                                                </div>
+                                                <label class="toggle-switch">
+                                                    <input type="checkbox" id="exportPrefetchTasks" checked disabled>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </label>
+
+                                            <label class="export-option-item sub-item">
+                                                <div class="export-option-info">
+                                                    <div class="export-option-title">书籍缓存状态</div>
+                                                    <div class="export-option-desc">导出书籍缓存的索引信息</div>
+                                                </div>
+                                                <label class="toggle-switch">
+                                                    <input type="checkbox" id="exportBookCache" checked disabled>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </label>
+
+                                            <label class="export-option-item sub-item">
+                                                <div class="export-option-info">
+                                                    <div class="export-option-title">书籍内容文件</div>
+                                                    <div class="export-option-desc">包含章节内容、封面图片等文件（文件较大）</div>
+                                                </div>
+                                                <label class="toggle-switch">
+                                                    <input type="checkbox" id="exportAudioFiles" checked disabled>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- 导出进度 -->
+                                    <div class="export-progress-container" id="exportProgressGroup" style="display: none;">
+                                        <div class="progress-header">
+                                            <span id="exportProgressText">准备导出...</span>
+                                            <span id="exportProgressPercent">0%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div id="exportProgressBar" class="progress-fill"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 导出按钮 -->
+                                    <div class="export-actions">
+                                        <button class="btn btn-primary" id="exportDataBtn">
+                                            <i class="fas fa-download"></i>
+                                            导出数据
+                                        </button>
+                                        <button class="btn btn-secondary" id="refreshExportStatsBtn">
+                                            <i class="fas fa-sync-alt"></i>
+                                            刷新
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- 服务器设置 -->
+                            <section id="server" class="settings-section" style="display: none;">
+                                <h2 class="settings-section-title">
+                                    <i class="fas fa-server"></i>
+                                    服务器设置
+                                </h2>
+
+                                <!-- 服务器状态卡片 -->
+                                <div class="server-status-cards">
+                                    <div class="status-card">
+                                        <div class="status-card-icon online">
+                                            <i class="fas fa-wifi"></i>
+                                        </div>
+                                        <div class="status-card-content">
+                                            <div class="status-card-label">当前访问地址</div>
+                                            <div class="status-card-value" id="currentServerAddress">-</div>
+                                        </div>
+                                    </div>
+                                    <div class="status-card">
+                                        <div class="status-card-icon config">
+                                            <i class="fas fa-info-circle"></i>
+                                        </div>
+                                        <div class="status-card-content">
+                                            <div class="status-card-label">配置状态</div>
+                                            <div class="status-card-value" id="portConfigStatus">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 端口配置区域 -->
+                                <div class="server-config-section">
+                                    <div class="section-card-header">
+                                        <i class="fas fa-network-wired"></i>
+                                        <span>端口配置</span>
+                                    </div>
+
+                                    <div class="server-config-warning">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <span>修改端口后需要重启服务才能生效</span>
+                                    </div>
+
+                                    <div class="server-port-config">
+                                        <div class="port-input-group">
+                                            <label class="port-input-label">
+                                                <span class="port-label-title">服务端口</span>
+                                                <span class="port-label-desc">设置服务器监听的端口号，范围 1024-65535</span>
+                                            </label>
+                                            <div class="port-input-wrapper">
+                                                <input type="number" id="serverPortInput" class="port-input" value="3000" min="1024" max="65535">
+                                                <span class="port-input-suffix">端口</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="server-actions">
+                                        <button class="btn btn-primary" id="saveServerPortBtn">
+                                            <i class="fas fa-save"></i>
+                                            保存设置
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- 关于 -->
+                            <section id="about" class="settings-section" style="display: none;">
+                                <h2 class="settings-section-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    关于
+                                </h2>
+
+                                <div class="settings-group">
+                                    <div class="settings-item">
+                                        <div class="settings-item-label">
+                                            <span class="settings-item-name">DoBao TTS</span>
+                                            <span class="settings-item-desc">一个让你能够调用豆包TTS来听书的小项目</span>
+                                        </div>
+                                        <span class="text-secondary" id="appVersion">获取失败...</span>
+                                    </div>
+
+                                    <div class="settings-item developer-item">
+                                        <div class="settings-item-label">
+                                            <span class="settings-item-name">开发者</span>
+                                            <span class="settings-item-desc">@夜雨扰心弦 · 欢迎交流反馈</span>
+                                        </div>
+                                        <div class="developer-links">
+                                            <a href="https://www.coolapk.com/u/3379301" target="_blank" class="social-link coolapk-link" title="酷安主页">
+                                                <i class="fas fa-mobile-alt"></i>
+                                                <span>酷安</span>
+                                            </a>
+                                            <a href="https://qm.qq.com/q/jDiVucR6RW" target="_blank" class="social-link qq-link" title="QQ交流群">
+                                                <i class="fab fa-qq"></i>
+                                                <span>QQ群</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="settings-item">
+                                        <div class="settings-item-label">
+                                            <span class="settings-item-name">软件更新</span>
+                                            <span class="settings-item-desc">上传更新包进行系统升级</span>
+                                        </div>
+                                        <button class="btn btn-primary" id="checkUpdateBtn">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            进行更新
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast通知容器 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- 更新弹窗 -->
+    <div class="update-modal-overlay" id="updateModal">
+        <div class="update-modal">
+            <div class="update-modal-header">
+                <h3 class="update-modal-title">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    系统更新
+                </h3>
+                <button class="update-modal-close" id="closeUpdateModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="update-modal-body">
+                <div class="update-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="update-warning-text">
+                        <strong>注意：</strong>更新过程中服务将会关闭，请确保在更新前保存好正在进行的工作。
+                    </div>
+                </div>
+
+                <div class="update-dropzone" id="updateDropzone">
+                    <div class="update-dropzone-icon">
+                        <i class="fas fa-file-archive"></i>
+                    </div>
+                    <div class="update-dropzone-text">
+                        拖放更新包到此处，或点击选择文件
+                    </div>
+                    <div class="update-dropzone-hint">
+                        支持 .zip 格式的更新包
+                    </div>
+                    <div class="touch-hint">
+                        点击选择 .zip 更新包文件
+                    </div>
+                    <input type="file" class="update-file-input" id="updateFileInput" accept=".zip,application/zip,application/x-zip,application/x-zip-compressed" capture="filesystem">
+                </div>
+
+                <div class="update-file-info" id="updateFileInfo">
+                    <div class="update-file-name" id="updateFileName"></div>
+                    <div class="update-file-size" id="updateFileSize"></div>
+                </div>
+
+                <div class="update-progress" id="updateProgress">
+                    <div class="update-progress-bar">
+                        <div class="update-progress-fill" id="updateProgressFill"></div>
+                    </div>
+                    <div class="update-progress-text" id="updateProgressText">准备上传...</div>
+                </div>
+
+                <div class="update-status" id="updateStatus"></div>
+            </div>
+            <div class="update-modal-footer">
+                <button class="btn btn-secondary" id="cancelUpdateBtn">取消</button>
+                <button class="btn btn-primary" id="confirmUpdateBtn" disabled>
+                    <i class="fas fa-upload"></i>
+                    开始更新
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 定时预制设置弹窗 -->
+    <div class="ptm-modal-overlay" id="scheduleModal">
+        <div class="ptm-modal">
+            <div class="ptm-modal-header">
+                <h3 class="ptm-modal-title" id="scheduleModalTitle">
+                    <i class="fas fa-clock"></i>
+                    设置定时预制
+                </h3>
+                <button class="ptm-modal-close" id="closeScheduleModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="ptm-modal-body">
+                <div class="ptm-modal-book-info" id="scheduleBookInfo">
+                    <i class="fas fa-book"></i>
+                    <span id="scheduleBookName">未知书籍</span>
+                </div>
+
+                <div class="ptm-form-group">
+                    <div class="ptm-form-label">
+                        <i class="fas fa-hourglass-half"></i>
+                        间隔时间
+                    </div>
+                    <div class="ptm-time-picker">
+                        <div class="ptm-time-col">
+                            <div class="ptm-time-label">小时</div>
+                            <div class="ptm-time-options" id="scheduleHourOptions">
+                            </div>
+                        </div>
+                        <div class="ptm-time-separator">:</div>
+                        <div class="ptm-time-col">
+                            <div class="ptm-time-label">分钟</div>
+                            <div class="ptm-time-options" id="scheduleMinuteOptions">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="ptm-form-hint">最长24小时，最短5分钟</p>
+                </div>
+
+                <div class="ptm-form-group">
+                    <label class="ptm-form-label" for="scheduleChapters">
+                        <i class="fas fa-list-ol"></i>
+                        每次预制章节数
+                    </label>
+                    <div class="ptm-form-input-row">
+                        <input type="number" id="scheduleChapters" class="ptm-form-input" value="10" min="1" placeholder="≥1">
+                        <span class="ptm-form-suffix">章</span>
+                    </div>
+                    <p class="ptm-form-hint">每次定时执行时预制的章节数量</p>
+                </div>
+            </div>
+            <div class="ptm-modal-footer">
+                <button class="btn btn-secondary" id="cancelScheduleBtn">取消</button>
+                <button class="btn btn-primary" id="confirmScheduleBtn">
+                    <i class="fas fa-check"></i>
+                    <span id="confirmScheduleBtnText">确认创建</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入主题脚本 -->
+    <script src="/js/theme.js"></script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/onboarding.js"></script>
+    <script>
+        // 导航切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.settings-nav-link');
+            const sections = document.querySelectorAll('.settings-section');
+            const themeOptions = document.querySelectorAll('.theme-option');
+
+            // 导航链接点击事件
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    // 移除所有活动状态
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.style.display = 'none');
+
+                    // 添加当前活动状态
+                    this.classList.add('active');
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    targetSection.style.display = 'block';
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
